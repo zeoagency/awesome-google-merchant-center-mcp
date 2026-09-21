@@ -14,10 +14,10 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
    - [Direct Google Merchant API v1 servers (4)](#direct-google-merchant-api-v1-servers)
    - [Official and reference developer SDKs (3)](#official-and-reference-developer-sdks)
    - [Consolidated catalog management gateways (6)](#consolidated-catalog-management-gateways)
-2. [Diagnose disapprovals, policy violations, and feed health (11)](#2-diagnose-disapprovals-policy-violations-and-feed-health)
+2. [Diagnose disapprovals, policy violations, and feed health (9)](#2-diagnose-disapprovals-policy-violations-and-feed-health)
    - [gRPC and REST diagnostic monitors (3)](#grpc-and-rest-diagnostic-monitors)
    - [Disapproval and policy resolution engines (3)](#disapproval-and-policy-resolution-engines)
-   - [Search intelligence and competitive price scraping (5)](#search-intelligence-and-competitive-price-scraping)
+   - [Search intelligence and competitive price scraping (3)](#search-intelligence-and-competitive-price-scraping)
 3. [Persist and analyze performance with MCQL and SQL (9)](#3-persist-and-analyze-performance-with-mcql-and-sql)
    - [Embedded database and local cache engines (3)](#embedded-database-and-local-cache-engines)
    - [E-commerce intelligence and partner analytics (3)](#e-commerce-intelligence-and-partner-analytics)
@@ -25,17 +25,16 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 4. [Enforce operational safety, dry-runs, and mutation rollback (4)](#4-enforce-operational-safety-dry-runs-and-mutation-rollback)
    - [Two-phase commit and catalog mutation guards (2)](#two-phase-commit-and-catalog-mutation-guards)
    - [Safe execution sandboxes and spending authorization (2)](#safe-execution-sandboxes-and-spending-authorization)
-5. [Manage multi-tenant access and Multi-Client Account (MCA) routing (4)](#5-manage-multi-tenant-access-and-multi-client-account-mca-routing)
-   - [Multi-tenant OAuth gateways and sub-account routers (3)](#multi-tenant-oauth-gateways-and-sub-account-routers)
+5. [Manage multi-tenant access and Multi-Client Account (MCA) routing (3)](#5-manage-multi-tenant-access-and-multi-client-account-mca-routing)
+   - [Multi-tenant OAuth gateways and sub-account routers (2)](#multi-tenant-oauth-gateways-and-sub-account-routers)
    - [Context persistence and account scoping protocols (1)](#context-persistence-and-account-scoping-protocols)
-6. [Bridge e-commerce storefronts and multi-channel catalogs (7)](#6-bridge-e-commerce-storefronts-and-multi-channel-catalogs)
+6. [Bridge e-commerce storefronts and multi-channel catalogs (4)](#6-bridge-e-commerce-storefronts-and-multi-channel-catalogs)
    - [Shopify storefront and co-worker bridges (2)](#shopify-storefront-and-co-worker-bridges)
    - [Headless and composable commerce backends (2)](#headless-and-composable-commerce-backends)
-   - [Multi-marketplace and regional catalog bridges (3)](#multi-marketplace-and-regional-catalog-bridges)
-7. [Deploy autonomous agentic commerce, ACP/UCP, and machine settlement (9)](#7-deploy-autonomous-agentic-commerce-acpucp-and-machine-settlement)
+7. [Deploy autonomous agentic commerce, ACP/UCP, and machine settlement (8)](#7-deploy-autonomous-agentic-commerce-acpucp-and-machine-settlement)
    - [Universal Commerce Protocol (UCP) onboarding and reference stacks (4)](#universal-commerce-protocol-ucp-onboarding-and-reference-stacks)
    - [POS and voice-activated merchant terminals (2)](#pos-and-voice-activated-merchant-terminals)
-   - [Autonomous payment and settlement protocols (3)](#autonomous-payment-and-settlement-protocols)
+   - [Autonomous payment and settlement protocols (2)](#autonomous-payment-and-settlement-protocols)
 8. [Resources](#resources)
    - [Official Documentation & SDKs](#official-documentation--sdks)
    - [Specifications & Standards](#specifications--standards)
@@ -48,67 +47,60 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ## Developer Comparison Matrix
 
-*A comparative feature matrix of all 57 Model Context Protocol servers, developer SDKs, and agent interfaces for Google Merchant Center, detailing language runtime, tool count, target API surface, operational safety flags, authentication patterns, and local storage engines. Click on any project name to jump directly to its detailed listing below.*
+*A comparative feature matrix of all 50 Model Context Protocol servers, developer SDKs, and agent interfaces for Google Merchant Center, detailing language runtime, target API surface, tool count, operational safety guardrails, authentication patterns, and quality tiers. Click on any project name to jump directly to its detailed listing below.*
 
-| Server / Tool | Runtime | Tools | Target API | Read/Write | Dry-Run | 2-Phase Commit | Audit Ledger | Auth Pattern | MCA Routing | Storage Engine | MCQL Search | GTIN Mod-10 | Feed Formats | Agent Protocol | Stars | Recency | Tier / Grade |
-| --- | --- | :---: | --- | --- | :---: | :---: | :---: | --- | :---: | --- | :---: | :---: | :---: | :---: | :---: | :---: | --- |
-| [**A1-x-Tech/mcp-google-merchants**](#A1-x-Tech--mcp-google-merchants) | TypeScript | 28 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-09 | B · Community Stable |
-| [**A1-x-Tech/mcp-yandex-merchants**](#A1-x-Tech--mcp-yandex-merchants) | TypeScript | 13 | Yandex Market / Ya | Read-Write | — | ✅ | ✅ | OAuth 2.1 PKCE | — | In-Memory | ✅ | ✅ | XML/TSV | MCP | ★0 | 2026-09 | A+ · Production-Ready |
-| [**AgriciDaniel/claude-seo**](#AgriciDaniel--claude-seo) | Python | 8 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★17351 | 2026-09 | B · Community Stable |
-| [**BurhanBeigh/merchant-feed-builder**](#BurhanBeigh--merchant-feed-builder) | Python | — | Shopify Admin | Read-Only from Shopify (scoped strictly to `read_products`); writes local validated GMC product feeds (RSS 2.0 XML / TSV) | ✅ | ✅ | — | Config / Env | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | REST / SDK | ★1 | 2026-08 | A · Production-Ready |
-| [**GajewskiMarcin/FeedForge**](#GajewskiMarcin--FeedForge) | PHP | — | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | OAuth 2.0 | — | Stateless Proxy | — | — | JSON | REST / SDK | ★3 | 2026-09 | A- · Community Stable |
-| [**GreXLin85/serper.dev-mcp**](#GreXLin85--serper.dev-mcp) | TypeScript | 12 | Shopping SERP | Read-Only | — | — | — | API Key | — | Stateless Proxy | ✅ | ✅ | JSON | MCP | ★1 | 2026-08 | A · Production-Ready |
-| [**HYPD-AI/ads-mcp-plugin**](#HYPD-AI--ads-mcp-plugin) | Config / Spec | 5 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★2 | 2026-08 | B · Community Stable |
-| [**HasData/shopify-mcp**](#HasData--shopify-mcp) | Python | 2 | Shopping SERP | Read-Only Public Storefront Scraping | — | — | — | API Key | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★8 | 2026-09 | A · Production-Ready |
-| [**MadMaxen92/marketing-mcp**](#MadMaxen92--marketing-mcp) | TypeScript | 56 | Merchant API v1 | Read-Write | ✅ | ✅ | ✅ | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | JSON | MCP | ★0 | 2026-09 | A+ · Production-Ready |
-| [**MentionNetwork/awesome-agentic-commerce**](#MentionNetwork--awesome-agentic-commerce) | Config / Spec | — | UCP / ACP | Read-Only Documentation | — | — | — | Config / Env | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | UCP | ★62 | 2026-07 | B · Community Stable |
-| [**NVIDIA-AI-Blueprints/Retail-Agentic-Commerce**](#NVIDIA-AI-Blueprints--Retail-Agentic-Commerce) | Python | 10 | UCP / ACP | Read-Write Full Agentic Checkout Lifecycle | ✅ | ✅ | ✅ | Bearer Token | ✅ | In-Memory | ✅ | ✅ | XML/TSV | UCP | ★75 | 2026-09 | A+ · Production-Ready |
-| [**Nas198222/google-mcp-bridge**](#Nas198222--google-mcp-bridge) | TypeScript | 17 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-05 | B · Community Stable |
-| [**NovaCorpAI/agentpos-alexa**](#NovaCorpAI--agentpos-alexa) | TypeScript | 7 | UCP / ACP | Read-Write | ✅ | ✅ | — | OAuth 2.0 | ✅ | SQLite Worker | — | — | JSON | UCP | ★0 | 2026-09 | A+ · Production-Ready |
-| [**PaidSync/paidsync-mcp**](#PaidSync--paidsync-mcp) | TypeScript | 3 | Merchant API v1 | Read-Write Catalog & Campaign Management (Full write across Google Ads/Meta/LinkedIn/OpenAI; Feed and link management on Google Merchant Center; Read-manage-optimize on TikTok/Snapchat/Reddit/Pinterest/Microsoft) | ✅ | ✅ | ✅ | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★3 | 2026-09 | B+ · Community Stable |
-| [**PayRam/payram-mcp**](#PayRam--payram-mcp) | TypeScript | 52 | Payment API | Read-Write | ✅ | ✅ | — | API Key | ✅ | In-Memory | — | — | Multi | MCP | ★156 | 2026-07 | A · Production-Ready |
-| [**ShoppingResult/shoppingscraper-cli**](#ShoppingResult--shoppingscraper-cli) | TypeScript | 18 | ShoppingScraper RE | Read-Only | ✅ | ✅ | — | API Key | — | Stateless Proxy | — | ✅ | JSON | MCP | ★1 | 2026-07 | A · Production-Ready |
-| [**ViryaZheng/ucp-onboard**](#ViryaZheng--ucp-onboard) | Python | 7 | UCP / ACP | Read-Write Catalog & Profile Generation (Local Scaffolding and Export) | ✅ | ✅ | ✅ | Config / Env | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | UCP | ★4 | 2026-06 | A · Production-Ready |
-| [**YerayRodri/merchant-center-mcp**](#YerayRodri--merchant-center-mcp) | Python | 4 | Merchant API v1 | Read-Only Diagnostics | — | — | — | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★0 | 2026-08 | A- · Community Stable |
-| [**aakashraj7/vocalize**](#aakashraj7--vocalize) | TypeScript | 2 | Merchant API v1 | Read-Write | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-06 | B · Community Stable |
-| [**agentic-commerce-lab/shopware-claude-commerce**](#agentic-commerce-lab--shopware-claude-commerce) | Python | 34 | UCP / ACP | Read-Write | ✅ | ✅ | — | OAuth 2.1 PKCE | ✅ | SQLite Worker | ✅ | ✅ | JSON | UCP | ★0 | 2026-09 | A+ · Production-Ready |
-| [**agidesigner/OpenLucid**](#agidesigner--OpenLucid) | Python | 50 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | PostgreSQL | — | — | JSON | MCP | ★31 | 2026-05 | B · Community Stable |
-| [**akelaonline/MCP-Google-Ads**](#akelaonline--MCP-Google-Ads) | Python | 461 | Merchant API v1 | Read-Write with Mandatory Propose-Confirm Two-Phase Commit | ✅ | ✅ | ✅ | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★4 | 2026-09 | A+ · Production-Ready |
-| [**alessandrobenigni/ScrapingDog-MCP**](#alessandrobenigni--ScrapingDog-MCP) | JavaScript | 77 | Shopping SERP | Read-Only | — | — | — | API Key | — | Stateless Proxy | — | ✅ | JSON | MCP | ★1 | 2026-07 | B+ · Community Stable |
-| [**alisadiq-ai/sketric-dataforseo-mcp-prefork**](#alisadiq-ai--sketric-dataforseo-mcp-prefork) | TypeScript | — | Merchant API v1 | Read-Only | ✅ | ✅ | — | Config / Env | — | Stateless Proxy | — | — | JSON | REST / SDK | ★0 | 2026-04 | B · Community Stable |
-| [**almoretti/martech-ai-skills-and-tools**](#almoretti--martech-ai-skills-and-tools) | TypeScript | 39 | Merchant API v1 | Read-First with Explicit Write Confirmations (Only 3 write commands; delete requires --yes) | ✅ | ✅ | — | ADC / IAM | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★2 | 2026-07 | A · Production-Ready |
-| [**api-evangelist/agenthaven-dev**](#api-evangelist--agenthaven-dev) | Config / Spec | 2 | Merchant API v1 | Read-Only | ✅ | ✅ | — | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-09 | B · Community Stable |
-| [**apivault-labs/n8n-nodes-apivault-temu**](#apivault-labs--n8n-nodes-apivault-temu) | TypeScript | 1 | Shopping SERP | Read & Transform (Scrapes upstream and exports GMC / Shopify feeds) | — | — | — | Bearer Token | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★3 | 2026-09 | B+ · Community Stable |
-| [**christyandas/google-ads-brasil**](#christyandas--google-ads-brasil) | JavaScript | 126 | Merchant API v1 | Hybrid (Read-only diagnostics and automated scripts with manual execution via Google Ads Script panel) | — | — | — | Service Account | — | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★0 | 2026-07 | B · Community Stable |
-| [**davillafer/mcp-merchant-scout**](#davillafer--mcp-merchant-scout) | TypeScript | 4 | UCP / ACP | Read-Only | — | — | — | Config / Env | ✅ | In-Memory | ✅ | ✅ | JSON | UCP | ★0 | 2026-03 | A- · Community Stable |
-| [**flovoice53-tech/acp-sandbox**](#flovoice53-tech--acp-sandbox) | TypeScript | 7 | Agentic Commerce P | Read-Write | — | ✅ | ✅ | Bearer Token | ✅ | SQLite Worker | — | ✅ | Multi | ACP | ★0 | 2026-09 | A- · Community Stable |
-| [**gioenjoy/mcp-google-merchant-center**](#gioenjoy--mcp-google-merchant-center) | TypeScript | 6 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Service Account | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-06 | B · Community Stable |
-| [**google/merchant-api-alpha-client**](#google--merchant-api-alpha-client) | Python | — | Merchant API v1 | Full Read-Write SDK (Supports get, list, insert, delete for Product Reviews and Merchant Reviews) | — | — | ✅ | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | REST / SDK | ★1 | 2026-06 | A+ · Production-Ready |
-| [**google/merchant-api-samples**](#google--merchant-api-samples) | Python | 2 | Merchant API v1 | Read-Only | ✅ | ✅ | — | Service Account | — | Stateless Proxy | — | — | JSON | MCP | ★31 | 2026-09 | A+ · Production-Ready |
-| [**googleads/googleads-shopping-samples**](#googleads--googleads-shopping-samples) | Java | — | Content API v2.1 | Read-Write SDK Reference (full CRUD sample implementations for Content API v2.1) | ✅ | ✅ | — | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | REST / SDK | ★207 | 2026-06 | B+ · Community Stable |
-| [**haerriz/magento2-google-shopping-feed**](#haerriz--magento2-google-shopping-feed) | TypeScript | 7 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Service Account | — | Stateless Proxy | — | — | JSON | MCP | ★1 | 2026-08 | B · Community Stable |
-| [**ihint/merchant-context**](#ihint--merchant-context) | TypeScript | 9 | UCP / ACP | Read-Write | ✅ | ✅ | — | Config / Env | ✅ | SQLite Worker | — | — | XML/TSV | UCP | ★0 | 2026-08 | A+ · Production-Ready |
-| [**itallstartedwithaidea/advertising-hub**](#itallstartedwithaidea--advertising-hub) | Python | 6 | Merchant API v1 | Read-Write | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★42 | 2026-07 | B · Community Stable |
-| [**johnisanerd/Apify-Google-Shopping-API**](#johnisanerd--Apify-Google-Shopping-API) | Python | 1 | Shopping SERP | Read-Only | — | — | — | OAuth 2.0 | ✅ | Stateless Proxy | — | ✅ | JSON | MCP | ★0 | 2026-09 | B- · Early Prototype |
-| [**kLOsk/adloop**](#kLOsk--adloop) | Python | 84 | Merchant API v1 | Hybrid (Merchant Center is strictly Read-Only Diagnostic; Google Ads, GA4, and Reddit Ads support Read-Write with two-phase commit) | ✅ | ✅ | ✅ | OAuth 2.0 | ✅ | In-Memory | ✅ | ✅ | XML/TSV | MCP | ★266 | 2026-09 | A · Production-Ready |
-| [**kevinfee3/authoryze-mcp**](#kevinfee3--authoryze-mcp) | Config / Spec | 4 | Visa Intelligent C | Read-Write | ✅ | ✅ | — | OAuth 2.1 PKCE | ✅ | Stateless Proxy | — | — | Multi | MCP | ★0 | 2026-08 | B · Community Stable |
-| [**kinerette/claude-code-checkout-upsell**](#kinerette--claude-code-checkout-upsell) | Config / Spec | 5 | Shopify Admin | Read-Write | ✅ | ✅ | — | Config / Env | ✅ | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-09 | A- · Community Stable |
-| [**kiwoongeom/gmc-mcp**](#kiwoongeom--gmc-mcp) | Python | 126 | Merchant API v1 | Read-Write Catalog Management (full CRUD across products, inventory, feeds, promotions, regions, and accounts) | ✅ | ✅ | ✅ | OAuth 2.0 | ✅ | In-Memory | ✅ | ✅ | XML/TSV | MCP | ★15 | 2026-05 | A · Production-Ready |
-| [**lgiavedoni/claude-for-commerce-merchant-commercetools**](#lgiavedoni--claude-for-commerce-merchant-commercetools) | Python | 16 | commercetools | Read-Write | ✅ | ✅ | — | OAuth 2.0 | ✅ | In-Memory | ✅ | ✅ | JSON | MCP | ★0 | 2026-09 | A · Production-Ready |
-| [**markifact/markifact-mcp**](#markifact--markifact-mcp) | TypeScript | 8 | Merchant API v1 | Read-Write | ✅ | ✅ | ✅ | OAuth 2.1 PKCE | — | Stateless Proxy | — | — | JSON | MCP | ★48 | 2026-09 | B · Community Stable |
-| [**marwa-mrwan/google-clarity-mcp-codex**](#marwa-mrwan--google-clarity-mcp-codex) | JavaScript | 213 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | OAuth 2.0 | — | Stateless Proxy | — | — | JSON | MCP | ★0 | 2026-09 | A · Production-Ready |
-| [**msalihk/catalog-mcp**](#msalihk--catalog-mcp) | TypeScript | 3 | Shopify Admin | Read-Only | — | — | — | Config / Env | — | Stateless Proxy | ✅ | ✅ | JSON | MCP | ★0 | 2026-09 | A · Production-Ready |
-| [**prajapatimehul/shopify-cowork**](#prajapatimehul--shopify-cowork) | Python | 7 | Shopify Admin | Read-Write | ✅ | ✅ | — | Bearer Token | ✅ | Stateless Proxy | — | ✅ | JSON | MCP | ★15 | 2026-05 | A · Production-Ready |
-| [**protyoya/Razorpay-Buidathon-Project**](#protyoya--Razorpay-Buidathon-Project) | JavaScript | 10 | Payment API | Read-Write | ✅ | ✅ | — | Config / Env | — | In-Memory | — | — | JSON | MCP | ★1 | 2026-09 | A · Production-Ready |
-| [**psrikanthm/expense-report**](#psrikanthm--expense-report) | Python | — | Google Maps MCP Se | Read-Only Analysis (Parses local bank statements, queries remote Google Maps MCP for merchant location grounding, generates PDF reports) | ✅ | ✅ | — | API Key | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | REST / SDK | ★0 | 2026-06 | B+ · Community Stable |
-| [**roblouw2nd/fetchgate**](#roblouw2nd--fetchgate) | Python | 4 | Fetchgate Cloudfla | Read-Only Content & Transactional Payment Challenge | ✅ | ✅ | ✅ | Config / Env | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | MCP | ★1 | 2026-09 | B+ · Community Stable |
-| [**rushikeshmore/shopify-partner-agent**](#rushikeshmore--shopify-partner-agent) | Python | 6 | Merchant API v1 | Read-Only | ✅ | ✅ | — | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★13 | 2026-04 | B · Community Stable |
-| [**simpleproductfeeds/skills**](#simpleproductfeeds--skills) | Config / Spec | 16 | Content API v2.1 | Read-Write | ✅ | ✅ | — | OAuth 2.0 | ✅ | Stateless Proxy | — | ✅ | XML/TSV | MCP | ★0 | 2026-08 | A · Production-Ready |
-| [**theYahia/ifood-mcp**](#theYahia--ifood-mcp) | TypeScript | 26 | iFood Merchant API | Read-Write | — | ✅ | — | OAuth 2.0 | ✅ | In-Memory | — | — | JSON | MCP | ★1 | 2026-09 | A · Production-Ready |
-| [**thesagarjain9-cpu/ucp-onboard**](#thesagarjain9-cpu--ucp-onboard) | TypeScript | 5 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | API Key | — | Stateless Proxy | — | — | JSON | MCP | ★2 | 2026-09 | B · Community Stable |
-| [**umeshravani/spree_google_products**](#umeshravani--spree_google_products) | Ruby | — | Content API v2.1 | Read-Write Catalog Synchronization (pushes products/variants, fetches approval status and issues) | — | — | ✅ | OAuth 2.0 | ✅ | Stateless Proxy | ✅ | ✅ | XML/TSV | REST / SDK | ★4 | 2026-06 | A- · Community Stable |
-| [**visa/vic-reference-agent**](#visa--vic-reference-agent) | TypeScript | 6 | Merchant API v1 | Read-Only | ✅ | ✅ | ✅ | Config / Env | — | Stateless Proxy | — | — | JSON | MCP | ★17 | 2026-06 | B · Community Stable |
-| [**webloom-agency/merchant-center-mcp**](#webloom-agency--merchant-center-mcp) | Python | 25 | Merchant API v1 | Read-Only Enforced by Default with Safe Write Whitelist | ✅ | ✅ | ✅ | OAuth 2.1 PKCE | ✅ | In-Memory | ✅ | ✅ | XML/TSV | MCP | ★0 | 2026-08 | A · Production-Ready |
+| Project | Stars | Runtime | Target API | Tools | Mode | Safety Guardrails | Auth Pattern | Tier |
+|---|:---:|---|---|:---:|---|---|---|---|
+| [**A1-x-Tech/mcp-google-merchants**](#A1-x-Tech--mcp-google-merchants) | ★ 0 | TypeScript | Merchant API v1 | 28 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**AgriciDaniel/claude-seo**](#AgriciDaniel--claude-seo) | ★ 17351 | Python | Merchant API v1 | 8 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**BurhanBeigh/merchant-feed-builder**](#BurhanBeigh--merchant-feed-builder) | ★ 1 | Python | Shopify Admin | — | Read-Only from Shopify (scoped strictly to `read_products`); writes local validated GMC product feeds (RSS 2.0 XML / TSV) | ✅ Dry-Run | Config / Env | A · Production-Ready |
+| [**GajewskiMarcin/FeedForge**](#GajewskiMarcin--FeedForge) | ★ 3 | PHP | Merchant API v1 | — | Read-Only | ✅ Dry-Run · Rollback | OAuth 2.0 | A- · Community Stable |
+| [**GreXLin85/serper.dev-mcp**](#GreXLin85--serper.dev-mcp) | ★ 1 | TypeScript | Shopping SERP | 12 | Read-Only | — | API Key | A · Production-Ready |
+| [**HYPD-AI/ads-mcp-plugin**](#HYPD-AI--ads-mcp-plugin) | ★ 2 | Config / Spec | Merchant API v1 | 5 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**HasData/shopify-mcp**](#HasData--shopify-mcp) | ★ 8 | Python | Shopping SERP | 2 | Read-Only Public Storefront Scraping | — | API Key | A · Production-Ready |
+| [**MadMaxen92/marketing-mcp**](#MadMaxen92--marketing-mcp) | ★ 0 | TypeScript | Merchant API v1 | 56 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A+ · Production-Ready |
+| [**MentionNetwork/awesome-agentic-commerce**](#MentionNetwork--awesome-agentic-commerce) | ★ 62 | Config / Spec | UCP / ACP | — | Read-Only Documentation | — | Config / Env | B · Community Stable |
+| [**NVIDIA-AI-Blueprints/Retail-Agentic-Commerce**](#NVIDIA-AI-Blueprints--Retail-Agentic-Commerce) | ★ 75 | Python | UCP / ACP | 10 | Read-Write Full Agentic Checkout Lifecycle | ✅ Dry-Run · Rollback | Bearer Token | A+ · Production-Ready |
+| [**Nas198222/google-mcp-bridge**](#Nas198222--google-mcp-bridge) | ★ 0 | TypeScript | Merchant API v1 | 17 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**NovaCorpAI/agentpos-alexa**](#NovaCorpAI--agentpos-alexa) | ★ 0 | TypeScript | UCP / ACP | 7 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A+ · Production-Ready |
+| [**PaidSync/paidsync-mcp**](#PaidSync--paidsync-mcp) | ★ 3 | TypeScript | Merchant API v1 | 3 | Read-Write Catalog & Campaign Management (Full write across Google Ads/Meta/LinkedIn/OpenAI; Feed and link management on Google Merchant Center; Read-manage-optimize on TikTok/Snapchat/Reddit/Pinterest/Microsoft) | ✅ Dry-Run · Rollback | OAuth 2.0 | B+ · Community Stable |
+| [**PayRam/payram-mcp**](#PayRam--payram-mcp) | ★ 156 | TypeScript | Payment API | 52 | Read-Write | ✅ Dry-Run | API Key | A · Production-Ready |
+| [**ShoppingResult/shoppingscraper-cli**](#ShoppingResult--shoppingscraper-cli) | ★ 1 | TypeScript | ShoppingScraper RE | 18 | Read-Only | ✅ Dry-Run | API Key | A · Production-Ready |
+| [**ViryaZheng/ucp-onboard**](#ViryaZheng--ucp-onboard) | ★ 4 | Python | UCP / ACP | 7 | Read-Write Catalog & Profile Generation (Local Scaffolding and Export) | ✅ Dry-Run · Rollback | Config / Env | A · Production-Ready |
+| [**YerayRodri/merchant-center-mcp**](#YerayRodri--merchant-center-mcp) | ★ 0 | Python | Merchant API v1 | 4 | Read-Only Diagnostics | — | OAuth 2.0 | A- · Community Stable |
+| [**aakashraj7/vocalize**](#aakashraj7--vocalize) | ★ 0 | TypeScript | Merchant API v1 | 2 | Read-Write | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**agentic-commerce-lab/shopware-claude-commerce**](#agentic-commerce-lab--shopware-claude-commerce) | ★ 0 | Python | UCP / ACP | 34 | Read-Write | ✅ Dry-Run | OAuth 2.1 PKCE | A+ · Production-Ready |
+| [**agidesigner/OpenLucid**](#agidesigner--OpenLucid) | ★ 31 | Python | Merchant API v1 | 50 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**akelaonline/MCP-Google-Ads**](#akelaonline--MCP-Google-Ads) | ★ 4 | Python | Merchant API v1 | 461 | Read-Write with Mandatory Propose-Confirm Two-Phase Commit | ✅ Dry-Run · Rollback | OAuth 2.0 | A+ · Production-Ready |
+| [**alessandrobenigni/ScrapingDog-MCP**](#alessandrobenigni--ScrapingDog-MCP) | ★ 1 | JavaScript | Shopping SERP | 77 | Read-Only | — | API Key | B+ · Community Stable |
+| [**almoretti/martech-ai-skills-and-tools**](#almoretti--martech-ai-skills-and-tools) | ★ 2 | TypeScript | Merchant API v1 | 39 | Read-First with Explicit Write Confirmations (Only 3 write commands; delete requires --yes) | ✅ Dry-Run | ADC / IAM | A · Production-Ready |
+| [**api-evangelist/agenthaven-dev**](#api-evangelist--agenthaven-dev) | ★ 0 | Config / Spec | Merchant API v1 | 2 | Read-Only | ✅ Dry-Run | Config / Env | B · Community Stable |
+| [**christyandas/google-ads-brasil**](#christyandas--google-ads-brasil) | ★ 0 | JavaScript | Merchant API v1 | 126 | Hybrid (Read-only diagnostics and automated scripts with manual execution via Google Ads Script panel) | — | Service Account | B · Community Stable |
+| [**davillafer/mcp-merchant-scout**](#davillafer--mcp-merchant-scout) | ★ 0 | TypeScript | UCP / ACP | 4 | Read-Only | — | Config / Env | A- · Community Stable |
+| [**flovoice53-tech/acp-sandbox**](#flovoice53-tech--acp-sandbox) | ★ 0 | TypeScript | Agentic Commerce P | 7 | Read-Write | ✅ Dry-Run · Rollback | Bearer Token | A- · Community Stable |
+| [**gioenjoy/mcp-google-merchant-center**](#gioenjoy--mcp-google-merchant-center) | ★ 0 | TypeScript | Merchant API v1 | 6 | Read-Only | ✅ Dry-Run · Rollback | Service Account | B · Community Stable |
+| [**google/merchant-api-alpha-client**](#google--merchant-api-alpha-client) | ★ 1 | Python | Merchant API v1 | — | Full Read-Write SDK (Supports get, list, insert, delete for Product Reviews and Merchant Reviews) | ✅ Rollback | OAuth 2.0 | A+ · Official Reference |
+| [**google/merchant-api-samples**](#google--merchant-api-samples) | ★ 31 | Python | Merchant API v1 | 2 | Read-Only | ✅ Dry-Run | Service Account | A+ · Official Reference |
+| [**googleads/googleads-shopping-samples**](#googleads--googleads-shopping-samples) | ★ 207 | Java | Content API v2.1 | — | Read-Write SDK Reference (full CRUD sample implementations for Content API v2.1) | ✅ Dry-Run | OAuth 2.0 | B+ · Official Reference |
+| [**haerriz/magento2-google-shopping-feed**](#haerriz--magento2-google-shopping-feed) | ★ 1 | TypeScript | Merchant API v1 | 7 | Read-Only | ✅ Dry-Run · Rollback | Service Account | B · Community Stable |
+| [**ihint/merchant-context**](#ihint--merchant-context) | ★ 0 | TypeScript | UCP / ACP | 9 | Read-Write | ✅ Dry-Run | Config / Env | A+ · Production-Ready |
+| [**itallstartedwithaidea/advertising-hub**](#itallstartedwithaidea--advertising-hub) | ★ 42 | Python | Merchant API v1 | 6 | Read-Write | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**kLOsk/adloop**](#kLOsk--adloop) | ★ 266 | Python | Merchant API v1 | 84 | Hybrid (Merchant Center is strictly Read-Only Diagnostic; Google Ads, GA4, and Reddit Ads support Read-Write with two-phase commit) | ✅ Dry-Run · Rollback | OAuth 2.0 | A · Production-Ready |
+| [**kevinfee3/authoryze-mcp**](#kevinfee3--authoryze-mcp) | ★ 0 | Config / Spec | Visa Intelligent C | 4 | Read-Write | ✅ Dry-Run | OAuth 2.1 PKCE | B · Community Stable |
+| [**kinerette/claude-code-checkout-upsell**](#kinerette--claude-code-checkout-upsell) | ★ 0 | Config / Spec | Shopify Admin | 5 | Read-Write | ✅ Dry-Run | Config / Env | A- · Community Stable |
+| [**kiwoongeom/gmc-mcp**](#kiwoongeom--gmc-mcp) | ★ 15 | Python | Merchant API v1 | 126 | Read-Write Catalog Management (full CRUD across products, inventory, feeds, promotions, regions, and accounts) | ✅ Dry-Run · Rollback | OAuth 2.0 | A · Production-Ready |
+| [**lgiavedoni/claude-for-commerce-merchant-commercetools**](#lgiavedoni--claude-for-commerce-merchant-commercetools) | ★ 0 | Python | commercetools | 16 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A · Production-Ready |
+| [**markifact/markifact-mcp**](#markifact--markifact-mcp) | ★ 48 | TypeScript | Merchant API v1 | 8 | Read-Write | ✅ Dry-Run · Rollback | OAuth 2.1 PKCE | B · Community Stable |
+| [**marwa-mrwan/google-clarity-mcp-codex**](#marwa-mrwan--google-clarity-mcp-codex) | ★ 0 | JavaScript | Merchant API v1 | 213 | Read-Only | ✅ Dry-Run · Rollback | OAuth 2.0 | A · Production-Ready |
+| [**msalihk/catalog-mcp**](#msalihk--catalog-mcp) | ★ 0 | TypeScript | Shopify Admin | 3 | Read-Only | — | Config / Env | A · Production-Ready |
+| [**prajapatimehul/shopify-cowork**](#prajapatimehul--shopify-cowork) | ★ 15 | Python | Shopify Admin | 7 | Read-Write | ✅ Dry-Run | Bearer Token | A · Production-Ready |
+| [**roblouw2nd/fetchgate**](#roblouw2nd--fetchgate) | ★ 1 | Python | Fetchgate Cloudfla | 4 | Read-Only Content & Transactional Payment Challenge | ✅ Dry-Run · Rollback | Config / Env | B+ · Community Stable |
+| [**rushikeshmore/shopify-partner-agent**](#rushikeshmore--shopify-partner-agent) | ★ 13 | Python | Merchant API v1 | 6 | Read-Only | ✅ Dry-Run | Config / Env | B · Community Stable |
+| [**simpleproductfeeds/skills**](#simpleproductfeeds--skills) | ★ 0 | Config / Spec | Content API v2.1 | 16 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A · Production-Ready |
+| [**thesagarjain9-cpu/ucp-onboard**](#thesagarjain9-cpu--ucp-onboard) | ★ 2 | TypeScript | Merchant API v1 | 5 | Read-Only | ✅ Dry-Run · Rollback | API Key | B · Community Stable |
+| [**umeshravani/spree_google_products**](#umeshravani--spree_google_products) | ★ 4 | Ruby | Content API v2.1 | — | Read-Write Catalog Synchronization (pushes products/variants, fetches approval status and issues) | ✅ Rollback | OAuth 2.0 | A- · Community Stable |
+| [**visa/vic-reference-agent**](#visa--vic-reference-agent) | ★ 17 | TypeScript | Merchant API v1 | 6 | Read-Only | ✅ Dry-Run · Rollback | Config / Env | B · Community Stable |
+| [**webloom-agency/merchant-center-mcp**](#webloom-agency--merchant-center-mcp) | ★ 0 | Python | Merchant API v1 | 25 | Read-Only Enforced by Default with Safe Write Whitelist | ✅ Dry-Run · Rollback | OAuth 2.1 PKCE | A · Production-Ready |
 
 ---
 
@@ -154,7 +146,7 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ## 2. Diagnose disapprovals, policy violations, and feed health
 
-*11 projects. Diagnostic monitors, offline feed validation linters, disapproval issue mitigators, and competitive search scraping engines for maintaining catalog integrity.*
+*9 projects. Diagnostic monitors, offline feed validation linters, disapproval issue mitigators, and competitive search scraping engines for maintaining catalog integrity.*
 
 ### gRPC and REST diagnostic monitors
 
@@ -178,15 +170,13 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ### Search intelligence and competitive price scraping
 
-*5 projects. Specialized scrapers and SERP APIs capturing live Google Shopping competitor pricing, rankings, and stock levels.*
+*3 projects. Specialized scrapers and SERP APIs capturing live Google Shopping competitor pricing, rankings, and stock levels.*
 
 | Project | What it does |
 |---|---|
 | <a id="ShoppingResult--shoppingscraper-cli"></a>[**ShoppingResult/shoppingscraper-cli**](https://github.com/ShoppingResult/shoppingscraper-cli) | Extracts competitive pricing intelligence and Google Shopping SERP listings via 18 specialized CLI and MCP commands. Enables pricing elasticity analysis and automated price monitoring against competing merchant listings. |
 | <a id="GreXLin85--serper.dev-mcp"></a>[**GreXLin85/serper.dev-mcp**](https://github.com/GreXLin85/serper.dev-mcp) | Delivers real-time Google Shopping search results, product prices, ratings, and merchant positions via the Serper API. Provides AI agents with 12 tools for comparative market research and Google Shopping visibility auditing. |
-| <a id="johnisanerd--Apify-Google-Shopping-API"></a>[**johnisanerd/Apify-Google-Shopping-API**](https://github.com/johnisanerd/Apify-Google-Shopping-API) | Scrapes structured Google Shopping search pages and product comparison grids via serverless Apify actors. Retrieves real-time merchant pricing, stock availability, and sponsored ad placements for market intelligence. |
 | <a id="alessandrobenigni--ScrapingDog-MCP"></a>[**alessandrobenigni/ScrapingDog-MCP**](https://github.com/alessandrobenigni/ScrapingDog-MCP) | Provides 77 web scraping and search tools including dedicated Google Shopping SERP extraction endpoints. Bypasses bot detection barriers to deliver live merchant pricing data and competitor catalog structures. |
-| <a id="alisadiq-ai--sketric-dataforseo-mcp-prefork"></a>[**alisadiq-ai/sketric-dataforseo-mcp-prefork**](https://github.com/alisadiq-ai/sketric-dataforseo-mcp-prefork) | Bridges DataForSEO Google Shopping API and Merchant API v1 data streams into a single analytical MCP gateway. Supplies comprehensive keyword-level shopping rankings, item positions, and historical price movement. |
 
 ---
 
@@ -252,17 +242,16 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ## 5. Manage multi-tenant access and Multi-Client Account (MCA) routing
 
-*4 projects. Multi-tenant authentication proxies, agency sub-account routers, and session persistence frameworks managing Multi-Client Account (MCA) structures.*
+*3 projects. Multi-tenant authentication proxies, agency sub-account routers, and session persistence frameworks managing Multi-Client Account (MCA) structures.*
 
 ### Multi-tenant OAuth gateways and sub-account routers
 
-*3 projects. Enterprise gateways isolating credentials, managing client sub-accounts, and aggregating merchant financial telemetry.*
+*2 projects. Enterprise gateways isolating credentials, managing client sub-accounts, and aggregating merchant financial telemetry.*
 
 | Project | What it does |
 |---|---|
 | <a id="api-evangelist--agenthaven-dev"></a>[**api-evangelist/agenthaven-dev**](https://github.com/api-evangelist/agenthaven-dev) | Architects an enterprise catalog governance gateway supporting Multi-Client Account (MCA) delegation and sub-account routing. Enforces strict multi-tenant tenant isolation and scoped OAuth 2.1 access control across agency client portfolios. |
 | <a id="PaidSync--paidsync-mcp"></a>[**PaidSync/paidsync-mcp**](https://github.com/PaidSync/paidsync-mcp) | Provides a multi-tenant payment and billing MCP server connecting Google Merchant Center accounts with Stripe and custom billing rails. Manages subscription tiers, automated merchant invoice generation, and account-level settlement. |
-| <a id="psrikanthm--expense-report"></a>[**psrikanthm/expense-report**](https://github.com/psrikanthm/expense-report) | Automates financial reconciliation and operational expense tracking across merchant ad spend and Google Cloud API consumption. Parses multi-account billing exports and provides structured financial rollups for agency administrators. |
 
 ### Context persistence and account scoping protocols
 
@@ -276,7 +265,7 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ## 6. Bridge e-commerce storefronts and multi-channel catalogs
 
-*7 projects. Bidirectional connectors syncing e-commerce platforms (Shopify, Shopware, commercetools) and regional marketplaces with Google Merchant Center feeds.*
+*4 projects. Bidirectional connectors syncing e-commerce platforms (Shopify, Shopware, commercetools) with Google Merchant Center feeds.*
 
 ### Shopify storefront and co-worker bridges
 
@@ -296,21 +285,11 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 | <a id="agentic-commerce-lab--shopware-claude-commerce"></a>[**agentic-commerce-lab/shopware-claude-commerce**](https://github.com/agentic-commerce-lab/shopware-claude-commerce) | Implements a comprehensive 34-tool commerce bridge connecting Shopware 6.7 Admin API with Google Shopping and Claude. Enables bidirectional catalog updates, order tracking, customer management, and automated Google Shopping XML export. |
 | <a id="lgiavedoni--claude-for-commerce-merchant-commercetools"></a>[**lgiavedoni/claude-for-commerce-merchant-commercetools**](https://github.com/lgiavedoni/claude-for-commerce-merchant-commercetools) | Bridges commercetools composable commerce platforms with Google Merchant Center catalog feeds using 16 specialized tools. Implements Anthropic's enterprise commerce blueprint for large-scale enterprise catalog orchestration. |
 
-### Multi-marketplace and regional catalog bridges
-
-*3 projects. Connectors synchronizing catalog data across international marketplaces, delivery platforms, and workflow automation engines.*
-
-| Project | What it does |
-|---|---|
-| <a id="A1-x-Tech--mcp-yandex-merchants"></a>[**A1-x-Tech/mcp-yandex-merchants**](https://github.com/A1-x-Tech/mcp-yandex-merchants) | Implements a TypeScript Model Context Protocol server for Yandex Market Partner API, mirroring Google Merchant Center capabilities. Provides 28 tools for multi-marketplace catalog synchronization, price management, and regional availability mapping. |
-| <a id="theYahia--ifood-mcp"></a>[**theYahia/ifood-mcp**](https://github.com/theYahia/ifood-mcp) | Connects on-demand delivery merchants to the iFood Merchant API using 26 granular TypeScript MCP tools. Demonstrates real-time menu and catalog management, order processing, and dynamic inventory adjustments. |
-| <a id="apivault-labs--n8n-nodes-apivault-temu"></a>[**apivault-labs/n8n-nodes-apivault-temu**](https://github.com/apivault-labs/n8n-nodes-apivault-temu) | Provides an n8n workflow automation node for syncing and scraping marketplace product catalogs and prices. Enables low-code orchestration between multi-channel retail marketplaces and Google Merchant Center feeds. |
-
 ---
 
 ## 7. Deploy autonomous agentic commerce, ACP/UCP, and machine settlement
 
-*9 projects. Protocols and runtime environments for the Universal Commerce Protocol (UCP), Agentic Commerce Protocol (ACP), and cryptographic machine settlement.*
+*8 projects. Protocols and runtime environments for the Universal Commerce Protocol (UCP), Agentic Commerce Protocol (ACP), and cryptographic machine settlement.*
 
 ### Universal Commerce Protocol (UCP) onboarding and reference stacks
 
@@ -334,11 +313,10 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ### Autonomous payment and settlement protocols
 
-*3 projects. Settlement rails enabling autonomous AI agents to execute machine-to-machine checkout via fiat and decentralized rails.*
+*2 projects. Settlement rails enabling autonomous AI agents to execute machine-to-machine checkout and decentralized billing.*
 
 | Project | What it does |
 |---|---|
-| <a id="protyoya--Razorpay-Buidathon-Project"></a>[**protyoya/Razorpay-Buidathon-Project**](https://github.com/protyoya/Razorpay-Buidathon-Project) | Implements programmatic payment authorization and order settlement for autonomous AI agents using Razorpay payment rails. Demonstrates secure handoff from product selection to two-phase authorized payment execution. |
 | <a id="PayRam--payram-mcp"></a>[**PayRam/payram-mcp**](https://github.com/PayRam/payram-mcp) | Provides a self-hosted cryptocurrency payment gateway and merchant settlement server with 52 granular tools. Enables autonomous agentic transactions, instant on-chain invoice generation, and decentralized merchant billing. |
 | <a id="visa--vic-reference-agent"></a>[**visa/vic-reference-agent**](https://github.com/visa/vic-reference-agent) | Visa's official reference agent implementation for the Visa Intelligent Commerce (VIC) machine settlement framework. Demonstrates tokenized merchant checkout, cryptographic spending limits, and dispute-resistant agent purchases. |
 
@@ -381,7 +359,7 @@ Google is migrating merchant infrastructure from the monolithic **Content API fo
 
 ### Evaluation Methodology & Verification Invariants
 
-All 57 repositories listed in this catalog were evaluated against rigorous engineering standards:
+All 50 repositories listed in this catalog were evaluated against rigorous engineering standards:
 
 1. **AST & Code Inspection:** Every tool was audited at the source-code level to verify callable tool counts, Zod/Pydantic input schemas, error handling, and target API alignment.
 2. **Commit Recency Invariant:** Every repository has verified commit activity within the preceding 6 months (on or after March 21, 2026).
@@ -393,4 +371,4 @@ All 57 repositories listed in this catalog were evaluated against rigorous engin
 This repository enforces strict inclusion boundaries to protect developers from unmaintained code and AI hallucination:
 
 - **Included:** Production-grade MCP servers, official Google developer SDKs, verified shopping automation scripts, and documented agentic commerce protocols.
-- **Quarantined & Excluded:** 16 synthetic GitHub bot farm repositories discovered during research were audited and quarantined due to identical commit timestamps, hallucinated dependencies, zero issue activity, and lack of real API client code.
+- **Quarantined & Excluded:** 23 non-qualifying repositories (16 synthetic bot farm repositories discovered during discovery plus 7 off-scope/off-platform tools pruned during curation) are quarantined to maintain catalog purity.
