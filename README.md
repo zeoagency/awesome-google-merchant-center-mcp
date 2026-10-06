@@ -1,6 +1,8 @@
 # Awesome Google Merchant Center MCP [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-> A curated plain-English index of Model Context Protocol (MCP) servers, product feed validators, and agent-facing tools built for **[Google Merchant Center (GMC)](https://developers.google.com/merchant)**, the **Merchant API v1**, and autonomous commerce rails.
+> A curated, verified index of Model Context Protocol (MCP) servers and official developer tooling built for **[Google Merchant Center (GMC)](https://developers.google.com/merchant)**, the **Merchant API v1**, and Google Shopping automation.
+>
+> **Last verified:** 2026-10-05 · **Ecosystem reality:** No GMC MCP has a 12-month steady record yet; all dedicated servers were created in 2026 following the Google Merchant API v1 migration.
 
 Official links: [Google Merchant API v1](https://developers.google.com/merchant) · [Content API for Shopping v2.1](https://developers.google.com/shopping-content/reference/rest) · [Model Context Protocol](https://modelcontextprotocol.io/) · [Google Cloud Console](https://console.cloud.google.com/) · [Zeo Agency](https://zeo.org/)
 
@@ -10,27 +12,21 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 - [Developer Comparison Matrix](#developer-comparison-matrix)
 
-1. [Manage products, inventories, and catalog data sources (13)](#1-manage-products-inventories-and-catalog-data-sources)
-   - [Direct Google Merchant API v1 servers (4)](#direct-google-merchant-api-v1-servers)
-   - [Official and reference developer SDKs (3)](#official-and-reference-developer-sdks)
-   - [Consolidated catalog management gateways (6)](#consolidated-catalog-management-gateways)
-2. [Diagnose disapprovals, policy violations, and feed health (9)](#2-diagnose-disapprovals-policy-violations-and-feed-health)
-   - [gRPC and REST diagnostic monitors (3)](#grpc-and-rest-diagnostic-monitors)
-   - [Disapproval and policy resolution engines (3)](#disapproval-and-policy-resolution-engines)
-   - [Search intelligence and competitive price scraping (3)](#search-intelligence-and-competitive-price-scraping)
-3. [Persist and analyze performance with MCQL and SQL (9)](#3-persist-and-analyze-performance-with-mcql-and-sql)
-   - [Embedded database and local cache engines (3)](#embedded-database-and-local-cache-engines)
-   - [E-commerce intelligence and partner analytics (3)](#e-commerce-intelligence-and-partner-analytics)
-   - [Marketing orchestration and report generators (3)](#marketing-orchestration-and-report-generators)
-4. [Enforce operational safety, dry-runs, and mutation rollback (2)](#4-enforce-operational-safety-dry-runs-and-mutation-rollback)
-   - [Transactional edge proxies and protocol sandboxes (2)](#transactional-edge-proxies-and-protocol-sandboxes)
-5. [Manage multi-tenant access and Multi-Client Account (MCA) routing (3)](#5-manage-multi-tenant-access-and-multi-client-account-mca-routing)
-   - [Multi-tenant OAuth gateways and sub-account routers (2)](#multi-tenant-oauth-gateways-and-sub-account-routers)
-   - [Context persistence and account scoping protocols (1)](#context-persistence-and-account-scoping-protocols)
-6. [Bridge e-commerce storefronts and multi-channel catalogs (2)](#6-bridge-e-commerce-storefronts-and-multi-channel-catalogs)
-   - [Storefront catalog synchronization bridges (2)](#storefront-catalog-synchronization-bridges)
-7. [Deploy autonomous agentic commerce, ACP/UCP, and machine settlement (2)](#7-deploy-autonomous-agentic-commerce-acpucp-and-machine-settlement)
-   - [Universal Commerce Protocol (UCP) onboarding and reference stacks (2)](#universal-commerce-protocol-ucp-onboarding-and-reference-stacks)
+1. [Manage products, inventories, and catalog data sources (3)](#1-manage-products-inventories-and-catalog-data-sources)
+   - [Direct Google Merchant API v1 servers (2)](#direct-google-merchant-api-v1-servers)
+   - [Official developer documentation tooling (1)](#official-developer-documentation-tooling)
+2. [Diagnose disapprovals, policy violations, and feed health (3)](#2-diagnose-disapprovals-policy-violations-and-feed-health)
+   - [Disapproval detection and policy triage engines (3)](#disapproval-detection-and-policy-triage-engines)
+3. [Query performance analytics and MCQL reports (2)](#3-query-performance-analytics-and-mcql-reports)
+   - [Shopping campaign analytics and cross-channel performance (2)](#shopping-campaign-analytics-and-cross-channel-performance)
+4. [Enforce operational safety, dry-runs, and mutation rollback (1)](#4-enforce-operational-safety-dry-runs-and-mutation-rollback)
+   - [Governed writes and cryptographic approval ledgers (1)](#governed-writes-and-cryptographic-approval-ledgers)
+5. [Multi-service marketing suites with Merchant Center modules (2)](#5-multi-service-marketing-suites-with-merchant-center-modules)
+   - [Cross-platform marketing and ad operations suites (2)](#cross-platform-marketing-and-ad-operations-suites)
+6. [Legacy Content API for Shopping bridges (3)](#6-legacy-content-api-for-shopping-bridges)
+   - [Edge proxies and Content API v2.1 gateways (3)](#edge-proxies-and-content-api-v21-gateways)
+7. [Defective, deprecated, and hazardous implementations (Audit Warnings) (3)](#7-defective-deprecated-and-hazardous-implementations-audit-warnings)
+   - [Quarantined and hazardous implementations (3)](#quarantined-and-hazardous-implementations)
 8. [Resources](#resources)
    - [Official Documentation and SDKs](#official-documentation-and-sdks)
    - [Specifications and Standards](#specifications-and-standards)
@@ -43,230 +39,142 @@ Official links: [Google Merchant API v1](https://developers.google.com/merchant)
 
 ## Developer Comparison Matrix
 
-*A comparative feature matrix of all 40 Model Context Protocol servers, developer SDKs, and agent interfaces for Google Merchant Center, detailing language runtime, target API surface, tool count, operational safety guardrails, authentication patterns, and quality tiers. Click on any project name to jump directly to its detailed listing below.*
+*A comparative feature matrix of all 17 verified Model Context Protocol servers, official Google endpoints, and companion tools for Google Merchant Center, detailing language runtime, target API surface, AST-verified tool count, operational safety guardrails, authentication patterns, maintenance longevity, and empirical audit verdicts. Click on any project name to jump directly to its detailed listing below.*
 
-| Project | Stars | Runtime | Target API | Tools | Mode | Safety Guardrails | Auth Pattern | Tier |
-|---|:---:|---|---|:---:|---|---|---|---|
-| [**A1-x-Tech/mcp-google-merchants**](#A1-x-Tech--mcp-google-merchants) | ★ 0 | TypeScript | Merchant API v1 | 28 | Read-Only | — | Config / Env | B · Community Stable |
-| [**BurhanBeigh/merchant-feed-builder**](#BurhanBeigh--merchant-feed-builder) | ★ 1 | Python | GMC Feed XML/TSV | — | CLI / Generator | ✅ Dry-Run | Config / Env | A · Production-Ready |
-| [**GajewskiMarcin/FeedForge**](#GajewskiMarcin--FeedForge) | ★ 3 | PHP / PrestaShop | Merchant API v1 | — | Read-Only | ✅ Dry-Run | OAuth 2.0 | A- · Community Stable |
-| [**GreXLin85/serper.dev-mcp**](#GreXLin85--serper.dev-mcp) | ★ 1 | TypeScript | Google Shopping SERP | 12 | Read-Only | — | API Key | A · Production-Ready |
-| [**HYPD-AI/ads-mcp-plugin**](#HYPD-AI--ads-mcp-plugin) | ★ 2 | Config / Spec | Merchant API v1 | 5 | Read-Only | — | Config / Env | B · Community Stable |
-| [**MadMaxen92/marketing-mcp**](#MadMaxen92--marketing-mcp) | ★ 0 | TypeScript | Merchant API v1 | 56 | Read-Write | ✅ Dry-Run · Rollback | OAuth 2.0 | A+ · Production-Ready |
-| [**NVIDIA-AI-Blueprints/Retail-Agentic-Commerce**](#NVIDIA-AI-Blueprints--Retail-Agentic-Commerce) | ★ 75 | Python | UCP / ACP | 10 | Read-Write | — | Bearer Token | A+ · Production-Ready |
-| [**Nas198222/google-mcp-bridge**](#Nas198222--google-mcp-bridge) | ★ 0 | TypeScript | Merchant API v1 | 17 | Read-Only | — | Config / Env | B · Community Stable |
-| [**PaidSync/paidsync-mcp**](#PaidSync--paidsync-mcp) | ★ 3 | TypeScript | Merchant API v1 | 3 | Read-Write | — | OAuth 2.0 | B+ · Community Stable |
-| [**ShoppingResult/shoppingscraper-cli**](#ShoppingResult--shoppingscraper-cli) | ★ 1 | TypeScript | Google Shopping SERP | 18 | Read-Only | — | API Key | A · Production-Ready |
-| [**ViryaZheng/ucp-onboard**](#ViryaZheng--ucp-onboard) | ★ 4 | Python | UCP / ACP | 7 | Read-Write | — | Config / Env | A · Production-Ready |
-| [**YerayRodri/merchant-center-mcp**](#YerayRodri--merchant-center-mcp) | ★ 0 | Python | Merchant API v1 | 4 | Read-Only | — | OAuth 2.0 | A- · Community Stable |
-| [**aakashraj7/vocalize**](#aakashraj7--vocalize) | ★ 0 | TypeScript | Merchant API v1 | 2 | Read-Write | — | Config / Env | B · Community Stable |
-| [**agentic-commerce-lab/shopware-claude-commerce**](#agentic-commerce-lab--shopware-claude-commerce) | ★ 0 | Python | Shopware 6.7 Admin | 34 | Read-Write | ✅ Dry-Run | OAuth 2.1 PKCE | A+ · Production-Ready |
-| [**agidesigner/OpenLucid**](#agidesigner--OpenLucid) | ★ 31 | Python | Merchant API v1 | 50 | Read-Only | — | Config / Env | B · Community Stable |
-| [**akelaonline/MCP-Google-Ads**](#akelaonline--MCP-Google-Ads) | ★ 4 | Python | Merchant API v1 | 461 | Read-Write | ✅ Dry-Run · Rollback | OAuth 2.0 | A+ · Production-Ready |
-| [**alessandrobenigni/ScrapingDog-MCP**](#alessandrobenigni--ScrapingDog-MCP) | ★ 1 | JavaScript | Google Shopping SERP | 77 | Read-Only | — | API Key | B+ · Community Stable |
-| [**almoretti/martech-ai-skills-and-tools**](#almoretti--martech-ai-skills-and-tools) | ★ 2 | TypeScript | Merchant API v1 | 39 | Read-Write | ✅ Dry-Run | ADC / IAM | A · Production-Ready |
-| [**api-evangelist/agenthaven-dev**](#api-evangelist--agenthaven-dev) | ★ 0 | Config / Spec | Merchant API v1 | 2 | Read-Only | — | Config / Env | B · Community Stable |
-| [**christyandas/google-ads-brasil**](#christyandas--google-ads-brasil) | ★ 0 | JavaScript | Merchant API v1 | 126 | Hybrid | — | Service Account | B · Community Stable |
-| [**davillafer/mcp-merchant-scout**](#davillafer--mcp-merchant-scout) | ★ 0 | TypeScript | UCP / ACP | 4 | Read-Only | — | Config / Env | A- · Community Stable |
-| [**flovoice53-tech/acp-sandbox**](#flovoice53-tech--acp-sandbox) | ★ 0 | TypeScript | ACP Protocol | 7 | Read-Write | ✅ Sandbox / Gate | Bearer Token | A- · Community Stable |
-| [**gioenjoy/mcp-google-merchant-center**](#gioenjoy--mcp-google-merchant-center) | ★ 0 | TypeScript | Merchant API v1 | 6 | Read-Only | — | Service Account | B · Community Stable |
-| [**google/merchant-api-alpha-client**](#google--merchant-api-alpha-client) | ★ 1 | Python | Merchant API v1 | — | SDK / Reference | — | OAuth 2.0 | A+ · Official Reference |
-| [**google/merchant-api-samples**](#google--merchant-api-samples) | ★ 31 | Python | Merchant API v1 | 2 | Read-Only | — | Service Account | A+ · Official Reference |
-| [**googleads/googleads-shopping-samples**](#googleads--googleads-shopping-samples) | ★ 207 | Java | Content API v2.1 | — | SDK / Reference | — | OAuth 2.0 | A+ · Official Reference |
-| [**haerriz/magento2-google-shopping-feed**](#haerriz--magento2-google-shopping-feed) | ★ 1 | PHP / Magento 2 | Merchant API v1 | 7 | CLI / Generator | — | Service Account | B · Community Stable |
-| [**ihint/merchant-context**](#ihint--merchant-context) | ★ 0 | TypeScript | UCP / ACP | 9 | Read-Write | — | Config / Env | A+ · Production-Ready |
-| [**itallstartedwithaidea/advertising-hub**](#itallstartedwithaidea--advertising-hub) | ★ 42 | Python | Merchant API v1 | 6 | Read-Write | — | Config / Env | B · Community Stable |
-| [**kLOsk/adloop**](#kLOsk--adloop) | ★ 266 | Python | Merchant API v1 | 84 | Hybrid | ✅ Dry-Run · Rollback | OAuth 2.0 | A · Production-Ready |
-| [**kiwoongeom/gmc-mcp**](#kiwoongeom--gmc-mcp) | ★ 15 | Python | Merchant API v1 | 126 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A · Production-Ready |
-| [**markifact/markifact-mcp**](#markifact--markifact-mcp) | ★ 48 | TypeScript | Merchant API v1 | 8 | Read-Write | — | OAuth 2.1 PKCE | B · Community Stable |
-| [**marwa-mrwan/google-clarity-mcp-codex**](#marwa-mrwan--google-clarity-mcp-codex) | ★ 0 | JavaScript | Merchant API v1 | 213 | Read-Only | — | OAuth 2.0 | A · Production-Ready |
-| [**msalihk/catalog-mcp**](#msalihk--catalog-mcp) | ★ 0 | TypeScript | Shopify Storefront R | 3 | Read-Only | — | Config / Env | A · Production-Ready |
-| [**prajapatimehul/shopify-cowork**](#prajapatimehul--shopify-cowork) | ★ 15 | Python | Shopify Admin GraphQL | 7 | Read-Write | — | Bearer Token | A · Production-Ready |
-| [**roblouw2nd/fetchgate**](#roblouw2nd--fetchgate) | ★ 1 | Python | Cloudflare Edge Proxy | 4 | Read-Only | ✅ Sandbox / Gate | Config / Env | B+ · Community Stable |
-| [**rushikeshmore/shopify-partner-agent**](#rushikeshmore--shopify-partner-agent) | ★ 13 | Python | Merchant API v1 | 6 | Read-Only | — | Config / Env | B · Community Stable |
-| [**simpleproductfeeds/skills**](#simpleproductfeeds--skills) | ★ 0 | Config / Spec | Content API v2.1 | 16 | Read-Write | ✅ Dry-Run | OAuth 2.0 | A · Production-Ready |
-| [**umeshravani/spree_google_products**](#umeshravani--spree_google_products) | ★ 4 | Ruby / Rails | Content API v2.1 | — | CLI / Generator | — | OAuth 2.0 | A- · Community Stable |
-| [**webloom-agency/merchant-center-mcp**](#webloom-agency--merchant-center-mcp) | ★ 0 | Python | Merchant API v1 | 25 | Read-Write | ✅ Dry-Run · Rollback | OAuth 2.1 PKCE | A · Production-Ready |
+| Project | Runtime | Target API | Tools | Mode | Safety Guardrails | Auth Pattern | Longevity | Verdict / Recommendation |
+|---|---|---|:---:|---|---|---|:---:|---|
+| [**A1-x-Tech/mcp-google-merchants**](#A1-x-Tech--mcp-google-merchants) | TypeScript | Merchant API v1 | 28 | Read-Write | ⚠️ Unguarded writes | OAuth 2.0 PKCE / Token | 🟡 2 mo steady | ✅ **Primary Self-Hosted** (Pin 1.2.0, Read-Only) |
+| [**Google: Merchant API MCP**](#google--merchant-api-mcp) | Hosted Cloud | Merchant API v1 | 13 | Read / Low-Risk | 🛡️ Google-guarded filters | OAuth 2.0 Bearer | 🟡 Alpha | ➕ **Zero-Maintenance Option** (Try first) |
+| [**Google: Developer Docs MCP**](#google--developer-docs-mcp) | Hosted Cloud | Merchant API Specs | Docs | Read-Only | 🔒 Read-Only (Docs helper) | Open / None | 🟡 Active | 🧰 **Developer Docs Helper** (Coding assistant) |
+| [**webloom-agency/merchant-center-mcp**](#webloom-agency--merchant-center-mcp) | Python (FastMCP) | Merchant API v1 | 25 | Read-Only | 🔒 Read-Only | OAuth 2.1 PKCE | 🔴 Dormant (2 bursts) | 🔧 **Borrow Issue Rendering** |
+| [**YerayRodri/merchant-center-mcp**](#YerayRodri--merchant-center-mcp) | Python (FastMCP) | Merchant API v1 | 4 | Read-Only | 🔒 Read-Only | Service Account | 🔴 Dormant (1 commit) | ❌ **Skip** (Unmaintained prototype) |
+| [**MoonEyes/google-ecommerce-mcp**](#MoonEyes--google-ecommerce-mcp) | Python (FastMCP) | Merchant API v1 | 13 (3 GMC) | Read-Only | 🔒 Regex endpoint allowlist | Service Account JSON | 🔴 New (Oct 2026) | 🔧 **Borrow Allowlist Pattern** |
+| [**googleads/google-ads-mcp**](#googleads--google-ads-mcp) | Python (FastMCP) | Google Ads API | 3 | Read-Only | 🔒 Read-Only | OAuth 2.0 / Developer Token | 🟢 Steady (Official) | ➕ **Shopping/PMax Companion** (GAQL queries) |
+| [**MadMaxen92/marketing-mcp**](#MadMaxen92--marketing-mcp) | TypeScript | Merchant API v1 | 56 | Read-Only | 🔒 Read-Only (Merchant slice) | OAuth 2.0 | 🔴 Dormant (Aug 2026) | ❌ **Skip** (Unpublished, single sprint) |
+| [**ScaleLean/google-ads-mcp-starter**](#ScaleLean--google-ads-mcp-starter) | Python (FastMCP) | Merchant API v1 | 30 (14 GMC) | Governed Writes | 🛡️ HMAC approvals & rollback | OAuth 2.0 / Firestore | 🔴 Dormant (1 commit) | 🔧 **Borrow Write Safety** (HMAC ledger) |
+| [**kLOsk/adloop**](#kLOsk--adloop) | Python | Merchant API v1 | 109 (2 GMC) | Hybrid | 🛡️ Guarded | OAuth 2.0 | 🟡 Active (Ads focus) | ❌ **Skip for GMC** (Only 2 GMC tools) |
+| [**marwa-mrwan/google-clarity-mcp-codex**](#marwa-mrwan--google-clarity-mcp-codex) | JavaScript (Node.js) | Merchant API v1 | 213 (40 GMC) | Read-Write | ⚠️ Bloat / No License | OAuth 2.0 | 🔴 Dormant (0 tags) | ❌ **Skip** (Context bloat & legal risk) |
+| [**gioenjoy/mcp-google-merchant-center**](#gioenjoy--mcp-google-merchant-center) | JavaScript (Node.js) | Content API v2.1 | 6 | Read-Only | 🔒 Read-Only | Service Account ADC | 🔴 Dormant | ❌ **Skip** (Retired Content API v2.1) |
+| [**ai-godfather/google-mcp-universal**](#ai-godfather--google-mcp-universal) | Python | Content API v2.1 | 186 (20 GMC) | Read-Write | ⚠️ Unguarded writes | Service Account | 🔴 Dormant (2 commits) | ❌ **Skip** (Retired Content API v2.1) |
+| [**Nas198222/google-mcp-bridge**](#Nas198222--google-mcp-bridge) | TypeScript (Edge) | Content API v2.1 | 2 | Read-Only | ⚠️ Minimal | Service Account | 🔴 Dormant (4 commits) | ❌ **Skip** (Retired Content API v2.1) |
+| [**kiwoongeom/gmc-mcp**](#kiwoongeom--gmc-mcp) | Python (FastMCP) | Merchant API v1 | 126 | Destructive Writes | ❌ **Critical bug: Ignored filter** | OAuth 2.0 PKCE | 🔴 Dormant (1-day burst) | ❌ **HAZARD: Do Not Use** (Bulk delete defect) |
+| [**archpeng/GMC-mcp-server**](#archpeng--GMC-mcp-server) | Python (FastMCP) | Merchant API v1beta | 34 | Read-Write | ⚠️ Sunset API / No License | gRPC / Service Account | 🔴 Abandoned (Feb 2026) | ❌ **Skip** (Sunset v1beta / No License) |
+| [**akelaonline/MCP-Google-Ads**](#akelaonline--MCP-Google-Ads) | Python (FastMCP) | Content API v2.1 | 461 (17 GMC) | Read-Write | ⚠️ Massive context bloat | Dual SA / OAuth | 🔴 Dormant | ❌ **Skip** (461 tools, retired Content API) |
 
 ---
 
 ## 1. Manage products, inventories, and catalog data sources
 
-*13 projects. Core Model Context Protocol servers and developer SDKs connecting directly to Google Merchant API v1 and legacy Content API for Shopping endpoints for product ingestion, inventory synchronization, and batch updates.*
+*3 projects. Model Context Protocol servers and official endpoints connecting to the modern Google Merchant API v1 for product catalog ingestion, inventory management, and developer documentation.*
 
 ### Direct Google Merchant API v1 servers
 
-*4 projects. Dedicated, specification-compliant Model Context Protocol servers implementing the modern Merchant API v1 surface.*
+*2 projects. Production-oriented Model Context Protocol servers implementing the modern Google Merchant API v1 surface.*
 
 | Project | What it does |
 |---|---|
-| <a id="webloom-agency--merchant-center-mcp"></a>[**webloom-agency/merchant-center-mcp**](https://github.com/webloom-agency/merchant-center-mcp) | Provides a production-ready Python Model Context Protocol server exposing Google Merchant API v1 endpoints with multi-tenant OAuth 2.1 authentication and automated token refresh. Features 25 granular tools for catalog introspection, inventory synchronization, and batch updates for autonomous shopping agents. |
-| <a id="kiwoongeom--gmc-mcp"></a>[**kiwoongeom/gmc-mcp**](https://github.com/kiwoongeom/gmc-mcp) | Exposes 126 granular endpoints across Google Merchant API v1 sub-APIs (Products, Accounts, Inventories, Promotions, Data Sources) in a typed Python architecture. Includes automated OAuth 2.0 PKCE token management, rate limit backoff, and end-to-end catalog inspection. |
-| <a id="A1-x-Tech--mcp-google-merchants"></a>[**A1-x-Tech/mcp-google-merchants**](https://github.com/A1-x-Tech/mcp-google-merchants) | Implements a TypeScript Model Context Protocol server wrapping Google Merchant API v1 with Zod schema validation and StdioServerTransport. Provides 28 structured tools for querying account data sources, inspecting product statuses, and retrieving regional availability. |
-| <a id="gioenjoy--mcp-google-merchant-center"></a>[**gioenjoy/mcp-google-merchant-center**](https://github.com/gioenjoy/mcp-google-merchant-center) | Connects AI assistants directly to Google Merchant Center via Application Default Credentials (ADC) and Google Cloud service account keys. Offers 6 core tools for product catalog listings, approval status diagnostics, and feed health telemetry. |
+| <a id="A1-x-Tech--mcp-google-merchants"></a>[**A1-x-Tech/mcp-google-merchants**](https://github.com/A1-x-Tech/mcp-google-merchants) | Implements a dedicated TypeScript Model Context Protocol server wrapping Google Merchant API v1 with Zod schema validation and StdioServerTransport. Provides 22 core Merchant Center tools and 6 authentication management tools with automated CI and daily health-check workflows. |
+| <a id="google--merchant-api-mcp"></a>[**Google: Merchant API MCP Access Service**](https://merchantapi.googleapis.com/mcp) | Provides Google's official hosted remote Model Context Protocol endpoint for direct access to Merchant API v1 diagnostics, MCQL performance queries, and data sources. Serves 13 filtered tools (11 read-only and 2 low-risk data source operations) over standard OAuth 2.0 bearer authorization. |
 
-### Official and reference developer SDKs
+### Official developer documentation tooling
 
-*3 projects. Google's official polyglot SDKs, reference sample implementations, and developer assistant tooling.*
+*1 project. Google's official documentation assistant providing schema specifications and migration guidance.*
 
 | Project | What it does |
 |---|---|
-| <a id="google--merchant-api-samples"></a>[**google/merchant-api-samples**](https://github.com/google/merchant-api-samples) | Serves as Google's official polyglot reference repository containing production samples and the Merchant API Devdocs MCP integration. Enables coding agents to query upstream Merchant API v1 specifications, data source schemas, and migration guides in real time. |
-| <a id="google--merchant-api-alpha-client"></a>[**google/merchant-api-alpha-client**](https://github.com/google/merchant-api-alpha-client) | Distributes Google's official low-level multi-language client libraries for the Google Merchant API v1alpha. Provides native gRPC and REST bindings across Go, Python, TypeScript, Java, and C# for experimental Merchant API features. |
-| <a id="googleads--googleads-shopping-samples"></a>[**googleads/googleads-shopping-samples**](https://github.com/googleads/googleads-shopping-samples) | Google's authoritative reference implementation for the legacy Content API for Shopping v2.1. Demonstrates batch catalog ingestion, Multi-Client Account (MCA) provisioning, and supplemental feed management across enterprise architectures. |
-
-### Consolidated catalog management gateways
-
-*6 projects. Multi-purpose marketing and advertising servers bundling Google Merchant Center catalog management with campaign operations.*
-
-| Project | What it does |
-|---|---|
-| <a id="akelaonline--MCP-Google-Ads"></a>[**akelaonline/MCP-Google-Ads**](https://github.com/akelaonline/MCP-Google-Ads) | Provides an expansive Python MCP server featuring 461 tools spanning Google Merchant API v1, Shopping performance, and feed management. Features dual Service Account and OAuth authentication with integrated diagnostic reporting and campaign-feed alignment. |
-| <a id="christyandas--google-ads-brasil"></a>[**christyandas/google-ads-brasil**](https://github.com/christyandas/google-ads-brasil) | Offers a pre-configured Node.js marketing and shopping automation server with 126 tools tailored for Brazilian retail operations. Wraps Merchant API v1 product pipelines and regional pricing overrides with automated currency and tax normalization. |
-| <a id="marwa-mrwan--google-clarity-mcp-codex"></a>[**marwa-mrwan/google-clarity-mcp-codex**](https://github.com/marwa-mrwan/google-clarity-mcp-codex) | Integrates 213 cross-functional tools combining Microsoft Clarity user analytics with Google Merchant API v1 product data feeds. Correlates shopping feed disapprovals and product bounce rates with on-page user session recordings. |
-| <a id="Nas198222--google-mcp-bridge"></a>[**Nas198222/google-mcp-bridge**](https://github.com/Nas198222/google-mcp-bridge) | Bridges Google Workspace, Cloud, and Merchant API v1 services into a single unified TypeScript Model Context Protocol server. Provides 17 callable tools for querying product catalogs, inspecting quota utilization, and validating cloud service accounts. |
-| <a id="HYPD-AI--ads-mcp-plugin"></a>[**HYPD-AI/ads-mcp-plugin**](https://github.com/HYPD-AI/ads-mcp-plugin) | Delivers a lightweight 5-tool MCP plugin that coordinates Google Merchant Center product catalogs with automated shopping ads. Supports dynamic catalog synchronization and real-time inventory updates over standard MCP stdio transport. |
-| <a id="aakashraj7--vocalize"></a>[**aakashraj7/vocalize**](https://github.com/aakashraj7/vocalize) | Enables voice-driven catalog management and product feed status lookups via Google Merchant API v1. Transforms natural language voice commands into structured MCP tool calls for hands-free merchant administration. |
+| <a id="google--developer-docs-mcp"></a>[**Google: Developer Docs MCP Server**](https://merchantapi.googleapis.com/devdocs/mcp) | Retrieves official Google Merchant API documentation, schema references, and Content API v2.1 migration guides for AI coding agents. Operates strictly as a read-only developer documentation helper without accessing live merchant catalog accounts. |
 
 ---
 
 ## 2. Diagnose disapprovals, policy violations, and feed health
 
-*9 projects. Diagnostic monitors, offline feed validation linters, disapproval issue mitigators, and competitive search scraping engines for maintaining catalog integrity.*
+*3 projects. Specialized read-only diagnostic servers providing item-level disapproval triage, policy violation resolution, and endpoint allowlisting.*
 
-### gRPC and REST diagnostic monitors
+### Disapproval detection and policy triage engines
 
-*3 projects. High-throughput diagnostic servers inspecting item-level policy violations and feed processing errors.*
-
-| Project | What it does |
-|---|---|
-| <a id="YerayRodri--merchant-center-mcp"></a>[**YerayRodri/merchant-center-mcp**](https://github.com/YerayRodri/merchant-center-mcp) | Implements a focused Python MCP server delivering high-performance Google Merchant API v1 diagnostics over gRPC. Specializes in real-time disapproval detection, account-level issue inspection, and item-level policy violation breakdowns. |
-| <a id="GajewskiMarcin--FeedForge"></a>[**GajewskiMarcin/FeedForge**](https://github.com/GajewskiMarcin/FeedForge) | Validates and transforms product data feeds prior to Google Merchant Center ingestion via a streamlined CLI and MCP toolchain. Performs offline GS1 GTIN Mod-10 checksum validation, schema linting, and TSV/XML formatting to prevent feed rejection. |
-| <a id="BurhanBeigh--merchant-feed-builder"></a>[**BurhanBeigh/merchant-feed-builder**](https://github.com/BurhanBeigh/merchant-feed-builder) | Constructs schema-compliant Google Shopping XML and CSV feeds from arbitrary e-commerce database dumps. Ensures complete field mapping for required merchant attributes, tax codes, and shipping dimensions. |
-
-### Disapproval and policy resolution engines
-
-*3 projects. Automated remediation engines and platform feed generators addressing merchant account disapprovals.*
+*3 projects. Focused diagnostic engines inspecting Merchant Center issue codes and feed processing errors.*
 
 | Project | What it does |
 |---|---|
-| <a id="simpleproductfeeds--skills"></a>[**simpleproductfeeds/skills**](https://github.com/simpleproductfeeds/skills) | Packages 16 enterprise agent skills connecting AI assistants to cloud feed management platforms and Google Merchant API v1. Automates supplemental feed generation, automated product rule enforcement, and disapproval remediation workflows. |
-| <a id="haerriz--magento2-google-shopping-feed"></a>[**haerriz/magento2-google-shopping-feed**](https://github.com/haerriz/magento2-google-shopping-feed) | Generates optimized Google Shopping feeds directly from Adobe Commerce and Magento 2 enterprise catalog databases. Includes automated feed scheduling, multi-currency support, and batch XML generation for high-volume catalogs. |
-| <a id="umeshravani--spree_google_products"></a>[**umeshravani/spree_google_products**](https://github.com/umeshravani/spree_google_products) | Integrates Spree Commerce storefronts with Google Merchant Center using automated feed generation and Content API sync. Maintains continuous synchronization between active Ruby on Rails inventory levels and Google Shopping listings. |
-
-### Search intelligence and competitive price scraping
-
-*3 projects. Specialized scrapers and SERP APIs capturing live Google Shopping competitor pricing, rankings, and stock levels.*
-
-| Project | What it does |
-|---|---|
-| <a id="ShoppingResult--shoppingscraper-cli"></a>[**ShoppingResult/shoppingscraper-cli**](https://github.com/ShoppingResult/shoppingscraper-cli) | Extracts competitive pricing intelligence and Google Shopping SERP listings via 18 specialized CLI and MCP commands. Enables pricing elasticity analysis and automated price monitoring against competing merchant listings. |
-| <a id="GreXLin85--serper.dev-mcp"></a>[**GreXLin85/serper.dev-mcp**](https://github.com/GreXLin85/serper.dev-mcp) | Delivers real-time Google Shopping search results, product prices, ratings, and merchant positions via the Serper API. Provides AI agents with 12 tools for comparative market research and Google Shopping visibility auditing. |
-| <a id="alessandrobenigni--ScrapingDog-MCP"></a>[**alessandrobenigni/ScrapingDog-MCP**](https://github.com/alessandrobenigni/ScrapingDog-MCP) | Provides 77 web scraping and search tools including dedicated Google Shopping SERP extraction endpoints. Bypasses bot detection barriers to deliver live merchant pricing data and competitor catalog structures. |
+| <a id="webloom-agency--merchant-center-mcp"></a>[**webloom-agency/merchant-center-mcp**](https://github.com/webloom-agency/merchant-center-mcp) | Inspects Google Merchant API v1 product disapproval codes and account-level policy violations via 25 read-only FastMCP tools. Formats human-readable remediation instructions and diagnostic summaries for marketing consultants. |
+| <a id="YerayRodri--merchant-center-mcp"></a>[**YerayRodri/merchant-center-mcp**](https://github.com/YerayRodri/merchant-center-mcp) | Queries real-time item disapproval codes and data source statuses using 4 focused Python FastMCP diagnostic tools over Merchant API v1. Provides basic disapproval inspection but lacks automatic Google Cloud Project developer registration. |
+| <a id="MoonEyes--google-ecommerce-mcp"></a>[**MoonEyes/google-ecommerce-mcp**](https://github.com/MoonEyes/google-ecommerce-mcp) | Audits merchant issues and primary data sources through 3 dedicated Google Merchant Center tools within a 13-tool FastMCP e-commerce suite. Enforces a strict regex-based read-only endpoint allowlist that prevents unintended mutations. |
 
 ---
 
-## 3. Persist and analyze performance with MCQL and SQL
+## 3. Query performance analytics and MCQL reports
 
-*9 projects. Marketing data warehouses, local embedded databases, and analytical skill packs querying merchant performance using MCQL and SQL.*
+*2 projects. Reporting servers executing Merchant Center Query Language (MCQL) and Google Ads Query Language (GAQL) queries for Shopping campaign intelligence.*
 
-### Embedded database and local cache engines
+### Shopping campaign analytics and cross-channel performance
 
-*3 projects. Platforms synchronizing merchant catalogs into embedded relational databases for high-speed local SQL joins.*
-
-| Project | What it does |
-|---|---|
-| <a id="kLOsk--adloop"></a>[**kLOsk/adloop**](https://github.com/kLOsk/adloop) | Provides a mature Python marketing orchestration engine with 84 tools for syncing Google Merchant Center catalogs into an embedded relational database. Enables complex SQL joins between product inventory states, Google Shopping ad spend, and multi-channel attribution. |
-| <a id="MadMaxen92--marketing-mcp"></a>[**MadMaxen92/marketing-mcp**](https://github.com/MadMaxen92/marketing-mcp) | Exposes 56 comprehensive marketing tools connecting Google Merchant API v1, Google Ads, and Meta Ads. Features local state persistence, cross-network catalog performance tracking, and automated ROAS calculations. |
-| <a id="agidesigner--OpenLucid"></a>[**agidesigner/OpenLucid**](https://github.com/agidesigner/OpenLucid) | Implements a multi-agent marketing world model with 50 tools for catalog diagnostics and campaign strategy optimization. Maintains an internal state graph to analyze merchant SKU sales velocity and historical margin performance. |
-
-### E-commerce intelligence and partner analytics
-
-*3 projects. Specialized analytical toolkits surfacing SKU sales velocity, variant hierarchies, and catalog sync anomalies.*
+*2 projects. Query engines extracting impression share, product partitions, and catalog revenue metrics.*
 
 | Project | What it does |
 |---|---|
-| <a id="rushikeshmore--shopify-partner-agent"></a>[**rushikeshmore/shopify-partner-agent**](https://github.com/rushikeshmore/shopify-partner-agent) | Analyzes merchant store telemetry and Google Merchant Center catalog health for Shopify Plus agency partners. Combines 6 analytical tools to surface inventory turnover trends, catalog sync anomalies, and partner revenue metrics. |
-| <a id="msalihk--catalog-mcp"></a>[**msalihk/catalog-mcp**](https://github.com/msalihk/catalog-mcp) | Inspects e-commerce product catalogs and diagnostic feeds using 3 lightweight TypeScript MCP tools. Extracts variant-level pricing hierarchies, inventory counts, and image assets for instant agent analysis. |
-| <a id="davillafer--mcp-merchant-scout"></a>[**davillafer/mcp-merchant-scout**](https://github.com/davillafer/mcp-merchant-scout) | Performs automated merchant catalog discovery and price comparison across Universal Commerce Protocol (UCP) endpoints. Uses 4 search tools to index merchant nodes, query live product feeds, and evaluate category pricing parity. |
-
-### Marketing orchestration and report generators
-
-*3 projects. Cross-platform orchestration tools synthesizing Merchant Center feeds into automated ad copy and performance summaries.*
-
-| Project | What it does |
-|---|---|
-| <a id="itallstartedwithaidea--advertising-hub"></a>[**itallstartedwithaidea/advertising-hub**](https://github.com/itallstartedwithaidea/advertising-hub) | Consolidates advertising and catalog operations across Google Merchant Center, Meta, and TikTok into 6 multi-platform tools. Generates cross-platform catalog performance reports and flags out-of-sync product feeds. |
-| <a id="markifact--markifact-mcp"></a>[**markifact/markifact-mcp**](https://github.com/markifact/markifact-mcp) | Supplies 8 automated tools for generating dynamic marketing copy and promotional creatives from Google Merchant Center feeds. Extracts real-time product features, prices, and availability to synthesize ad headlines and social posts. |
-| <a id="almoretti--martech-ai-skills-and-tools"></a>[**almoretti/martech-ai-skills-and-tools**](https://github.com/almoretti/martech-ai-skills-and-tools) | Delivers 39 developer skills and CLI tools implementing the complete modern Google Merchant API v1 specification. Features automated OAuth 2.0 PKCE authentication, MCQL query execution, and structured JSON output for AI agents. |
+| <a id="googleads--google-ads-mcp"></a>[**googleads/google-ads-mcp**](https://github.com/googleads/google-ads-mcp) | Queries Google Ads and Performance Max campaign metrics via 3 official Python FastMCP tools using Google Ads Query Language (GAQL). Delivers essential Shopping campaign reporting, product partition performance, and impression share telemetry to complement Merchant Center catalog data. |
+| <a id="MadMaxen92--marketing-mcp"></a>[**MadMaxen92/marketing-mcp**](https://github.com/MadMaxen92/marketing-mcp) | Correlates Google Merchant Center product statuses with advertising performance across Google and Meta marketing channels. Exposes 56 cross-network tools with a read-only Merchant API v1 slice, though unmaintained since August 2026. |
 
 ---
 
 ## 4. Enforce operational safety, dry-runs, and mutation rollback
 
-*2 projects. Operational guardrails, transactional dry-run validators, edge proxies, and spend authorization layers protecting live merchant catalogs.*
+*1 project. Governed architectures enforcing cryptographic approval gates, before-state ledgers, and rollback snapshots for catalog mutations.*
 
-### Transactional edge proxies and protocol sandboxes
+### Governed writes and cryptographic approval ledgers
 
-*2 projects. Validation layers, rate-limiting proxies, and protocol testbeds verifying catalog interactions prior to execution.*
+*1 project. FastMCP implementation featuring two-phase mutation approvals and before-state audit ledgers.*
 
 | Project | What it does |
 |---|---|
-| <a id="roblouw2nd--fetchgate"></a>[**roblouw2nd/fetchgate**](https://github.com/roblouw2nd/fetchgate) | Acts as a secure Edge-deployed proxy on Cloudflare Workers for scraping and sanitizing merchant product data feeds. Applies rate-limiting, egress caching, and structural schema validation to protect origin merchant endpoints. |
-| <a id="flovoice53-tech--acp-sandbox"></a>[**flovoice53-tech/acp-sandbox**](https://github.com/flovoice53-tech/acp-sandbox) | Provides an isolated protocol testbed for the Agentic Commerce Protocol (ACP) and Universal Commerce Protocol (UCP). Allows developers to test autonomous product selection, checkout handoffs, and catalog queries in a sandboxed runtime. |
+| <a id="ScaleLean--google-ads-mcp-starter"></a>[**ScaleLean/google-ads-mcp-starter**](https://github.com/ScaleLean/google-ads-mcp-starter) | Secures Merchant API v1 and Google Ads mutations through 14 dedicated merchant tools governed by cryptographic HMAC approvals and Firestore audit logs. Captures before-and-after state snapshots to enable deterministic rollback of accidental catalog changes. |
 
 ---
 
-## 5. Manage multi-tenant access and Multi-Client Account (MCA) routing
+## 5. Multi-service marketing suites with Merchant Center modules
 
-*3 projects. Multi-tenant authentication proxies, agency sub-account routers, and session persistence frameworks managing Multi-Client Account (MCA) structures.*
+*2 projects. Broad marketing orchestration platforms packaging limited Google Merchant Center connectors alongside extensive advertising toolsets.*
 
-### Multi-tenant OAuth gateways and sub-account routers
+### Cross-platform marketing and ad operations suites
 
-*2 projects. Enterprise gateways isolating credentials, managing client sub-accounts, and aggregating merchant financial telemetry.*
-
-| Project | What it does |
-|---|---|
-| <a id="api-evangelist--agenthaven-dev"></a>[**api-evangelist/agenthaven-dev**](https://github.com/api-evangelist/agenthaven-dev) | Architects an enterprise catalog governance gateway supporting Multi-Client Account (MCA) delegation and sub-account routing. Enforces strict multi-tenant tenant isolation and scoped OAuth 2.1 access control across agency client portfolios. |
-| <a id="PaidSync--paidsync-mcp"></a>[**PaidSync/paidsync-mcp**](https://github.com/PaidSync/paidsync-mcp) | Provides a multi-tenant payment and billing MCP server connecting Google Merchant Center accounts with Stripe and custom billing rails. Manages subscription tiers, automated merchant invoice generation, and account-level settlement. |
-
-### Context persistence and account scoping protocols
-
-*1 project. Session context servers maintaining active account state across complex merchant hierarchies.*
+*2 projects. Enterprise suites bundling multi-network ad management with secondary Merchant Center utilities.*
 
 | Project | What it does |
 |---|---|
-| <a id="ihint--merchant-context"></a>[**ihint/merchant-context**](https://github.com/ihint/merchant-context) | Maintains persistent session context and organizational scope across complex Multi-Client Account (MCA) hierarchies. Provides 9 tools for caching merchant account metadata, current sub-account selection, and user permissions. |
+| <a id="kLOsk--adloop"></a>[**kLOsk/adloop**](https://github.com/kLOsk/adloop) | Orchestrates advertising workflows across Google Ads, Meta, and LinkedIn with 109 tools, including 2 dedicated Google Merchant Center tools for account discovery and feed health. Automates Google Cloud developer project registration but provides minimal native catalog management. |
+| <a id="marwa-mrwan--google-clarity-mcp-codex"></a>[**marwa-mrwan/google-clarity-mcp-codex**](https://github.com/marwa-mrwan/google-clarity-mcp-codex) | Bundles 40 Google Merchant API v1 tools with Microsoft Clarity behavioral analytics across a massive 213-tool Node.js suite. Connects product disapprovals to user session recordings, but imposes heavy LLM context bloat and lacks an open-source license grant. |
 
 ---
 
-## 6. Bridge e-commerce storefronts and multi-channel catalogs
+## 6. Legacy Content API for Shopping bridges
 
-*2 projects. Bidirectional connectors syncing e-commerce platforms (Shopify, Shopware) with Google Merchant Center feeds.*
+*3 projects. Legacy Model Context Protocol servers connecting to the retired Content API for Shopping v2.1.*
 
-### Storefront catalog synchronization bridges
+### Edge proxies and Content API v2.1 gateways
 
-*2 projects. Bridges connecting Shopify and Shopware store inventories, product variants, and admin endpoints to Merchant Center pipelines.*
+*3 projects. Historical bridges and Cloudflare workers querying deprecated Google Content API endpoints.*
 
 | Project | What it does |
 |---|---|
-| <a id="prajapatimehul--shopify-cowork"></a>[**prajapatimehul/shopify-cowork**](https://github.com/prajapatimehul/shopify-cowork) | Coordinates catalog synchronization between Shopify Admin GraphQL endpoints and Google Merchant Center feeds via 7 agent tools. Automates product attribute mapping, inventory synchronization, and collection-level feed segregation. |
-| <a id="agentic-commerce-lab--shopware-claude-commerce"></a>[**agentic-commerce-lab/shopware-claude-commerce**](https://github.com/agentic-commerce-lab/shopware-claude-commerce) | Implements a comprehensive 34-tool commerce bridge connecting Shopware 6.7 Admin API with Google Shopping and Claude. Enables bidirectional catalog updates, order tracking, customer management, and automated Google Shopping XML export. |
+| <a id="gioenjoy--mcp-google-merchant-center"></a>[**gioenjoy/mcp-google-merchant-center**](https://github.com/gioenjoy/mcp-google-merchant-center) | Connects to legacy Content API for Shopping v2.1 via 6 basic JavaScript tools for product catalog listings and account statuses. Relies on Application Default Credentials (ADC) but remains dormant and unmaintained. |
+| <a id="ai-godfather--google-mcp-universal"></a>[**ai-godfather/google-mcp-universal**](https://github.com/ai-godfather/google-mcp-universal) | Audits Google Shopping campaign coverage against merchant catalogs using 20 merchant tools within a 186-tool Python advertising suite. Targets the legacy Content API for Shopping v2.1 without migration to Merchant API v1. |
+| <a id="Nas198222--google-mcp-bridge"></a>[**Nas198222/google-mcp-bridge**](https://github.com/Nas198222/google-mcp-bridge) | Bridges Google Cloud and legacy Content API for Shopping v2.1 services using a TypeScript Cloudflare Pages edge deployment. Exports 2 basic catalog tools but has seen only 4 commits since initial upload. |
 
 ---
 
-## 7. Deploy autonomous agentic commerce, ACP/UCP, and machine settlement
+## 7. Defective, deprecated, and hazardous implementations (Audit Warnings)
 
-*2 projects. Protocols and reference stacks for the Universal Commerce Protocol (UCP) and Agentic Commerce Protocol (ACP).*
+*3 projects. Documented implementations carrying critical functional bugs, API deprecation blocks, or extreme schema bloat that disqualify them from production use.*
 
-### Universal Commerce Protocol (UCP) onboarding and reference stacks
+### Quarantined and hazardous implementations
 
-*2 projects. Official blueprints and onboarding agents for Google's Universal Commerce Protocol.*
+*3 projects. Servers evaluated during independent technical audits and flagged with severe operational warnings.*
 
 | Project | What it does |
 |---|---|
-| <a id="ViryaZheng--ucp-onboard"></a>[**ViryaZheng/ucp-onboard**](https://github.com/ViryaZheng/ucp-onboard) | Automates merchant onboarding and catalog registration for Google's Universal Commerce Protocol (UCP). Configures agent capabilities, validates merchant endpoint discovery manifests, and verifies UCP catalog compliance. |
-| <a id="NVIDIA-AI-Blueprints--Retail-Agentic-Commerce"></a>[**NVIDIA-AI-Blueprints/Retail-Agentic-Commerce**](https://github.com/NVIDIA-AI-Blueprints/Retail-Agentic-Commerce) | NVIDIA's flagship enterprise reference blueprint for agentic commerce, implementing the Universal Commerce Protocol (UCP). Combines multimodal product search, real-time inventory checking, and secure agent-to-agent checkout protocols. |
+| <a id="kiwoongeom--gmc-mcp"></a>[**kiwoongeom/gmc-mcp**](https://github.com/kiwoongeom/gmc-mcp) | Implements 126 Python FastMCP tools across Merchant API v1 but carries a critical data-loss defect in catalog management. Leaves the `filter_status` argument in `gmc_bulk_delete_products` implemented as a no-op `pass`, causing the tool to unconditionally delete all products in the catalog up to `max_delete`. |
+| <a id="archpeng--GMC-mcp-server"></a>[**archpeng/GMC-mcp-server**](https://github.com/archpeng/GMC-mcp-server) | Wraps 34 Google Merchant Center tools in Python FastMCP across accounts, products, and reports. Remains abandoned since February 2026, relies on deprecated `merchant_*_v1beta` endpoints sunset by Google, and lacks an open-source license. |
+| <a id="akelaonline--MCP-Google-Ads"></a>[**akelaonline/MCP-Google-Ads**](https://github.com/akelaonline/MCP-Google-Ads) | Assembles 461 tools across Google Ads and legacy Content API for Shopping v2.1 in a monolithic FastMCP server. Exhausts LLM context windows due to massive schema token bloat and targets retired Google Shopping API endpoints. |
 
 ---
 
@@ -295,7 +203,7 @@ Architectural principles, upstream API comparisons, and verification standards g
 
 ### Merchant API v1 vs Content API v2.1 Architecture
 
-Google is migrating merchant infrastructure from the monolithic **Content API for Shopping v2.1** to the modular **Google Merchant API v1**:
+Google has transitioned merchant infrastructure from the monolithic **Content API for Shopping v2.1** to the modular **Google Merchant API v1**:
 
 | Architectural Dimension | Legacy Content API for Shopping v2.1 | Modern Google Merchant API v1 |
 |---|---|---|
@@ -307,16 +215,26 @@ Google is migrating merchant infrastructure from the monolithic **Content API fo
 
 ### Evaluation Methodology and Verification Invariants
 
-All 40 repositories listed in this catalog were evaluated against rigorous engineering standards:
+All 17 repositories and endpoints listed in this catalog were evaluated against empirical engineering standards (Last verified: 2026-10-05):
 
 1. **AST & Code Inspection:** Every tool was audited at the source-code level to verify callable tool counts, Zod/Pydantic input schemas, error handling, and target API alignment.
-2. **Commit Recency Invariant:** Every repository has verified commit activity within the preceding 6 months (on or after March 21, 2026).
-3. **Developer Provenance & Anti-Slop Audit:** Maintainer GitHub profiles were audited to separate sustained human engineering from disposable single-commit synthetic boilerplate.
-4. **Operational Safety Audit:** Tools modifying live merchant inventories were evaluated for dry-run validation modes, spending guardrails, and audit rollback ledgers.
+2. **Longevity & Ecosystem Ground Truth:** No Google Merchant Center MCP in existence has a 12-month steady development record. Google Merchant API v1 reached general stability only in 2026 following the sunset of Content API v2.1 and v1beta. Every dedicated GMC MCP was created in 2026.
+3. **Developer Provenance & Anti-Slop Audit:** Maintainer GitHub profiles, commit histories, package registrations, and PR workflows were audited to separate sustained human engineering from disposable single-commit synthetic boilerplate or closed paywalls.
+4. **Operational Safety Audit:** Tools modifying live merchant inventories were evaluated for dry-run validation modes, spending guardrails, and audit rollback ledgers. Implementations with destructive defects (such as `kiwoongeom/gmc-mcp`) are explicitly flagged with hazard warnings.
 
 ### Repository Inclusion and Anti-Slop Policy
 
-This repository enforces strict inclusion boundaries to protect developers from unmaintained code, AI hallucination, and off-scope dilution:
+This catalog maintains strict boundaries to protect developers and consultants from unmaintained code, AI hallucination, and off-scope dilution.
 
-- **Included:** Production-grade MCP servers, official Google developer SDKs, verified shopping automation scripts, and documented agentic commerce protocols interfacing with Google Merchant Center.
-- **Quarantined & Excluded:** 33 non-qualifying repositories (16 synthetic bot farm repositories discovered during initial discovery plus 17 off-scope, off-platform, or malicious clones pruned during editorial review) are quarantined to maintain catalog purity.
+During our October 2026 empirical audit, **31 non-qualifying repositories** were pruned from this index:
+
+- **Official Code Samples & SDKs without MCP Runtimes (2):** `google/merchant-api-alpha-client` (client library bindings only), `googleads/googleads-shopping-samples` (Java Content API reference code).
+- **Standalone CMS Feed Plugins & Generators (4):** `haerriz/magento2-google-shopping-feed` (Magento 2 PHP extension), `umeshravani/spree_google_products` (Spree Rails gem), `BurhanBeigh/merchant-feed-builder` (standalone Python CLI feed builder), `GajewskiMarcin/FeedForge` (PrestaShop CLI feed validator).
+- **Search Engine SERP Scrapers (4):** `GreXLin85/serper.dev-mcp` (Serper SERP scraper), `alessandrobenigni/ScrapingDog-MCP` (scraping proxy), `ShoppingResult/shoppingscraper-cli` (Node.js SERP scraper), `roblouw2nd/fetchgate` (scraping proxy).
+- **Storefront-Only & Third-Party E-Commerce Connectors (5):** `rushikeshmore/shopify-partner-agent` (Shopify Partner analytics), `msalihk/catalog-mcp` (Shopify Storefront GTIN validator), `prajapatimehul/shopify-cowork` (Shopify GraphQL theme plugin), `agentic-commerce-lab/shopware-claude-commerce` (Shopware 6.7 Admin bridge), `agidesigner/OpenLucid` (social marketing copy generator with 0 GMC tools).
+- **Documentation & Roadmap Stubs with Zero GMC Code (2):** `itallstartedwithaidea/advertising-hub` (ad docs with zero GMC tools), `markifact/markifact-mcp` (zero GMC tools in code, roadmap mention only).
+- **Installer Shell Scripts (1):** `christyandas/google-ads-brasil` (duplicate shell script installing `kiwoongeom/gmc-mcp` from PyPI).
+- **Closed Commercial SaaS Paywalls (4):** `PaidSync/paidsync-mcp` (closed SaaS, unverified backend), `HYPD-AI/ads-mcp-plugin` (closed SaaS, no public code), `Ryze-AI-Adgent/cursor-plugin` (closed commercial connector), `simpleproductfeeds/skills` (proprietary backend, 0 public MCP tools).
+- **Generic Agentic Commerce & Settlement Testbeds (6):** `davillafer/mcp-merchant-scout` (UCP search tool), `flovoice53-tech/acp-sandbox` (ACP protocol sandbox), `api-evangelist/agenthaven-dev` (DNS-AID flight seller PoC), `ihint/merchant-context` (x402 protocol inspector), `ViryaZheng/ucp-onboard` (UCP onboarding agent), `NVIDIA-AI-Blueprints/Retail-Agentic-Commerce` (multimodal retail blueprint without GMC).
+- **Misclassified Scripts & Bots (2):** `aakashraj7/vocalize` (voice-to-MongoDB inventory script), `gonbenvindo-debug/google-tools-manager` (Playwright browser bot, not an MCP server).
+- **Non-MCP CLI Skill Packs (1):** `almoretti/martech-ai-skills-and-tools` (gmc-cli; contains 0 MCP tools or JSON-RPC protocol transport).
