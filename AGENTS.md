@@ -1,73 +1,23 @@
-# AGENTS.md
+# Catalog editing rules
 
-Architectural invariants, structural standards, and operational guidelines for AI agents and human contributors editing this repository. This project is a curated, developer-focused index and technical benchmark of the **Google Merchant Center (GMC)** Model Context Protocol (MCP) and agentic commerce ecosystem.
+## Scope
 
----
+List only MCP servers, command-line tools, and SDKs with implemented Google Merchant Center support. Multi-service tools qualify when a concrete Merchant Center module is documented and implemented; describe that module only. Merchant Center feed generation or validation qualifies when exposed through a CLI or SDK.
 
-## 1. Project Philosophy & Minimalist Structure
+Exclude general Google Ads tools, search-result scrapers, storefront plugins, commerce protocols, standalone examples, and general documentation. Official Merchant Center documentation MCP services qualify as MCP tools. Remove unavailable, broken, or unverifiable implementations instead of creating an archive or warning catalog.
 
-- **Direct Developer Utility:** Maintain a clean, minimalist document flow without promotional onboarding essays or redundant walkthroughs. The root `README.md` must consist exclusively of: title & badge, positioning blockquote, official links line, Table of Contents with parenthesized counts, Developer Comparison Matrix, 7 numbered problem-domain sections, Resources, and Reference.
-- **Immediate Navigation:** Developers and AI agents must be able to navigate from the Table of Contents or the Developer Comparison Matrix down to any specific tool's detailed description in one click.
-- **Mathematical Count Integrity (Tripartite Invariant):** The count displayed in `## Contents` must equal the section banner count, the sum of subcategory counts, and the exact count of table rows in that section without exception:
-  $$\text{Contents}(N) = \text{SectionBanner}(N) = \sum \text{Subcategory}(n) = \text{TableRows}(N)$$
+## Verification
 
----
+For every entry, verify its existence and Merchant Center functionality against the maintainer's source code, package, or official service documentation. Check the API version against Google's current lifecycle documentation. Distinguish deprecation, sunset, progressive service degradation, and shutdown; prefer tools targeting supported API versions.
 
-## 2. Language & Voice Standards
+Keep an entry only when its documented usage and implementation support the listed functionality. A README mention or roadmap alone is insufficient. Commit count, project age, and absence of tags alone do not prove a tool is broken or abandoned.
 
-Prose must remain concise, technical, and objective:
+State the date of source review. Describe source inspection accurately; claim runtime verification only when the tool was actually exercised. Keep research evidence outside the public catalog and link each entry to a canonical primary source. Attribute specific lifecycle caveats to Google's official documentation.
 
-### 2.1. Plain-English, Active-Verb Syntax
+## Presentation
 
-- Always open descriptions with active third-person verbs (*Ingests*, *Validates*, *Synchronizes*, *Monitors*, *Bridges*, *Orchestrates*, *Inspects*, *Provisions*).
-- Eliminate promotional marketing fluff (*"revolutionary"*, *"best-in-class"*, *"blazing fast"*, *"ultimate"*).
-- Specify exact technical surfaces (e.g., Merchant API v1, Content API v2.1, MCQL, GS1 GTIN Mod-10, OAuth 2.1 PKCE, SQLite caching).
+Keep README.md in English with a title and badge, a short scope statement, a contents list, and MCP, CLI, and SDK sections. Show the number of entries beside each contents link and in its section introduction; both must match the actual table rows. Omit empty sections and update navigation accordingly.
 
-### 2.2. The 1–2 Sentence Rule
+Use one entry per tool or language SDK. Link directly to its repository, package, or official service documentation. Write one or two factual sentences beginning with an active verb. Include the runtime and Merchant Center function where verified. Keep descriptions focused on Merchant Center; omit unsupported safety scores, maintenance judgments, tool counts, and production-readiness claims.
 
-Every catalog table entry must be strictly 1 or 2 sentences:
-
-- **Sentence 1:** Core functionality, primary runtime, and target API or protocol surface.
-- **Sentence 2 (optional):** Key architectural discriminator (e.g., two-phase commit rollback, embedded SQLite worker, multi-tenant MCA routing).
-
----
-
-## 3. Formatting Invariants
-
-### 3.1. Detailed Table Entries
-
-Each project entry in subcategory tables must follow this exact HTML anchor and markdown pattern:
-
-```markdown
-| <a id="owner--repo"></a>[**owner/repo**](https://github.com/owner/repo) | Description leading with an active verb. Optional second sentence on architectural details. |
-```
-
-- The `<a id="owner--repo"></a>` anchor enables direct jump links from the Developer Comparison Matrix.
-- The project link uses bold brackets `[**owner/repo**](url)`.
-
-### 3.2. Developer Comparison Matrix
-
-- Located in Section 8 or immediately following the Table of Contents.
-- Must not exceed 20 columns.
-- Uses internal jump links formatted as: `[**owner/repo**](#owner--repo)`.
-- Center alignment for checkmarks and status flags (`:---:`).
-
----
-
-## 4. Scope & Inclusion Boundaries
-
-### Strict Inclusions
-
-- Direct Google Merchant API v1 and legacy Content API for Shopping v2.1 MCP servers.
-- Product feed generators, XML/TSV formatters, and GS1 GTIN Mod-10 barcode validators.
-- Disapproval inspection, account diagnostic monitors, and policy issue mitigators.
-- Merchant Center Query Language (MCQL) search and reporting tools.
-- Multi-Client Account (MCA) and multi-tenant sub-account routing gateways.
-- E-commerce storefront bridges (Shopify, Shopware, commercetools) syncing with GMC.
-- Agentic commerce protocols (Universal Commerce Protocol / UCP, Agentic Commerce Protocol / ACP) interfacing with merchant catalogs and checkout.
-
-### Strict Exclusions
-
-- Generic Google Ads campaign management tools lacking product feed or catalog components.
-- General SEO web scrapers without dedicated Google Shopping or product SERP capabilities.
-- Unmaintained single-commit boilerplate repositories or unverified AI stock dumps.
+Before completing an edit, check every changed URL, local document link, and heading anchor, confirm section counts, and run the Markdown lint command in .github/workflows/ci.yml.
