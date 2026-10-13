@@ -2,22 +2,22 @@
 
 ## Scope
 
-List only MCP servers, command-line tools, and SDKs with implemented Google Merchant Center support. Multi-service tools qualify when a concrete Merchant Center module is documented and implemented; describe that module only. Merchant Center feed generation or validation qualifies when exposed through a CLI or SDK.
+List MCP servers, CLIs, and SDKs with implemented Google Merchant Center support. Multi-service MCP pages include Merchant tools and relevant setup helpers; record the full registry count and explain omitted tools. Merchant feed generation or validation qualifies when exposed through a CLI or SDK.
 
-Exclude general Google Ads tools, search-result scrapers, storefront plugins, commerce protocols, standalone examples, and general documentation. Official Merchant Center documentation MCP services qualify as MCP tools. Remove unavailable, broken, or unverifiable implementations instead of creating an archive or warning catalog.
+Exclude general advertising tools, scrapers, storefront plugins, commerce protocols, standalone examples, and general documentation. Merchant-specific documentation MCPs qualify. Remove unavailable, broken, or unverifiable implementations rather than maintaining a warning catalog. Commit count and project age alone do not establish abandonment.
 
-## Verification
+## Tool verification
 
-For every entry, verify its existence and Merchant Center functionality against the maintainer's source code, package, or official service documentation. Check the API version against Google's current lifecycle documentation. Distinguish deprecation, sunset, progressive service degradation, and shutdown; prefer tools targeting supported API versions.
+Audit one MCP at a time. Prefer actual MCP tools/list or runtime registry descriptors; resolve pagination, imported schemas, and optional registrations. When runtime extraction is impractical, evaluate the actual descriptor factories and verify their registration wiring. Distinguish source extraction from server startup and live API testing.
 
-Keep an entry only when its documented usage and implementation support the listed functionality. A README mention or roadmap alone is insufficient. Commit count, project age, and absence of tags alone do not prove a tool is broken or abandoned.
+Preserve exact names, full descriptions, and complete inputSchema objects, including nested definitions, required fields, defaults, enums, and free-form objects. Keep undefined constraints undefined; document implementation-only defaults or restrictions separately. Pin code links to the inspected revision and record extraction date and method.
 
-State the date of source review. Describe source inspection accurately; claim runtime verification only when the tool was actually exercised. Keep research evidence outside the public catalog and link each entry to a canonical primary source. Attribute specific lifecycle caveats to Google's official documentation.
+Review the tool handlers before assigning task categories and effects. Classify POST report queries as reads, direct mutations as writes, authentication/registration changes as setup, and reads that can persist setup or ledger state as mixed. Describe limitations that materially affect returned results or mutation behavior. Check API lifecycle claims against current Google documentation.
 
-## Presentation
+## Editing and completion
 
-Keep README.md in English with a title and badge, a short scope statement, a contents list, and MCP, CLI, and SDK sections. Show the number of entries beside each contents link and in its section introduction; both must match the actual table rows. Omit empty sections and update navigation accordingly.
+catalog/manifest.json defines server order, task categories, and companion CLI/SDK content. catalog/<id>.json is the source of truth for each MCP's reviewed descriptors and editorial metadata. README.md, TOOLS.md, and docs/mcps/*.md are generated; edit their catalog sources and run `python3 scripts/build_catalog.py`.
 
-Use one entry per tool or language SDK. Link directly to its repository, package, or official service documentation. Write one or two factual sentences beginning with an active verb. Include the runtime and Merchant Center function where verified. Keep descriptions focused on Merchant Center; omit unsupported safety scores, maintenance judgments, tool counts, and production-readiness claims.
+Choose an MCP's primary group from its implemented tools. Use one main-page entry per MCP with concrete tool examples; the alphabetical index must include every published tool/provider pair and link to its detailed definition. Keep full descriptions and schemas on the detail pages, with short summaries and parameter tables visible.
 
-Before completing an edit, check every changed URL, local document link, and heading anchor, confirm section counts, and run the Markdown lint command in .github/workflows/ci.yml.
+Before completion, compare published descriptors with the extraction output, review source behavior, run `python3 scripts/build_catalog.py --check` and the Markdown lint command in .github/workflows/ci.yml, and verify changed upstream links. Generated page counts and local anchors must match the catalog. Keep temporary extraction environments and research logs outside the repository.

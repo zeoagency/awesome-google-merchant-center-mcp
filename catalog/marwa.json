@@ -1,0 +1,1420 @@
+{
+  "id": "marwa",
+  "upstream": "https://github.com/marwa-mrwan/google-clarity-mcp-codex",
+  "revision": "2a6881b03cc8825ff634f8512100c8b566b6758f",
+  "verifiedAt": "2026-10-13T15:29:54.110Z",
+  "title": "marwa-mrwan/google-clarity-mcp-codex",
+  "primaryCategory": "operations",
+  "summary": "Manage subaccounts, local and regional inventory, and conversion sources alongside product, feed, and promotion operations.",
+  "examples": [
+    "merchant_insert_local_inventory",
+    "merchant_create_conversion_source"
+  ],
+  "method": "Evaluated upstream descriptor factories and checked their registration wiring; independently re-extracted. Server startup was not exercised.",
+  "totalRegisteredTools": 205,
+  "tools": [
+    {
+      "name": "merchant_list_accounts",
+      "description": "List Merchant Center accounts accessible to the OAuth user.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": []
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List Merchant Center accounts accessible to the OAuth user."
+    },
+    {
+      "name": "merchant_get_account",
+      "description": "Get one Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "Get one Merchant Center account."
+    },
+    {
+      "name": "merchant_get_developer_registration",
+      "description": "Get the Google Cloud project registration for a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          }
+        },
+        "required": []
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "support",
+      "summary": "Get the Google Cloud project registration for a Merchant Center account."
+    },
+    {
+      "name": "merchant_register_gcp",
+      "description": "Register the current Google Cloud project and developer contact with a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          },
+          "developer_email": {
+            "type": "string",
+            "format": "email",
+            "description": "Developer contact that will receive the API_DEVELOPER role or invitation."
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "developer_email"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "setup",
+      "category": "support",
+      "summary": "Register the current Google Cloud project and developer contact with a Merchant Center account.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_subaccounts",
+      "description": "List subaccounts under an advanced account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": []
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List subaccounts under an advanced account."
+    },
+    {
+      "name": "merchant_create_and_configure_account",
+      "description": "Create and configure a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "type": "object",
+            "description": "CreateAndConfigureAccount request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "request"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Create and configure a Merchant Center account.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_update_account",
+      "description": "Update a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "update_mask": {
+            "type": "string"
+          },
+          "account": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name",
+          "update_mask",
+          "account"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Update a Merchant Center account.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_delete_account",
+      "description": "Delete a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "force": {
+            "type": "boolean",
+            "default": false
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Delete a Merchant Center account.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_products",
+      "description": "List processed products.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": []
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List processed products."
+    },
+    {
+      "name": "merchant_get_product",
+      "description": "Get one processed product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          }
+        },
+        "required": [
+          "product_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Get one processed product."
+    },
+    {
+      "name": "merchant_insert_product_input",
+      "description": "Insert a product input into a data source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "product_input": {
+            "type": "object",
+            "description": "ProductInput body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name",
+          "data_source",
+          "product_input"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Insert a product input into a data source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_update_product_input",
+      "description": "Patch a product input.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_input_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/productInputs/{productInput}"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "update_mask": {
+            "type": "string"
+          },
+          "product_input": {
+            "type": "object",
+            "description": "ProductInput body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "product_input_name",
+          "data_source",
+          "update_mask",
+          "product_input"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Patch a product input.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_delete_product_input",
+      "description": "Delete a product input.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_input_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/productInputs/{productInput}"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "product_input_name",
+          "data_source"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Delete a product input.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_data_sources",
+      "description": "List data source configurations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List data source configurations."
+    },
+    {
+      "name": "merchant_get_data_source",
+      "description": "Get one data source configuration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          }
+        },
+        "required": [
+          "data_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Get one data source configuration."
+    },
+    {
+      "name": "merchant_create_data_source",
+      "description": "Create a data source configuration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "data_source": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name",
+          "data_source"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Create a data source configuration.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_update_data_source",
+      "description": "Update a data source configuration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "update_mask": {
+            "type": "string"
+          },
+          "data_source": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "data_source_name",
+          "update_mask",
+          "data_source"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Update a data source configuration.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_delete_data_source",
+      "description": "Delete a data source configuration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "data_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Delete a data source configuration.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_fetch_data_source",
+      "description": "Trigger an immediate fetch for a file data source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "data_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Trigger an immediate fetch for a file data source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_promotions",
+      "description": "List Merchant Center promotions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List Merchant Center promotions."
+    },
+    {
+      "name": "merchant_get_promotion",
+      "description": "Get one promotion.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "promotion_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/promotions/{promotion}"
+          }
+        },
+        "required": [
+          "promotion_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Get one promotion."
+    },
+    {
+      "name": "merchant_insert_promotion",
+      "description": "Insert a promotion.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "accounts/{accountId}/dataSources/{dataSourceId}"
+          },
+          "promotion": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name",
+          "data_source",
+          "promotion"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Insert a promotion.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_local_inventories",
+      "description": "List local inventory for a product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "product_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List local inventory for a product."
+    },
+    {
+      "name": "merchant_insert_local_inventory",
+      "description": "Insert local inventory for a product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          },
+          "local_inventory": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "product_name",
+          "local_inventory"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Insert local inventory for a product.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_delete_local_inventory",
+      "description": "Delete local inventory.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "inventory_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}/localInventories/{storeCode}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "inventory_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Delete local inventory.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_regional_inventories",
+      "description": "List regional inventory for a product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "product_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List regional inventory for a product."
+    },
+    {
+      "name": "merchant_insert_regional_inventory",
+      "description": "Insert regional inventory for a product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          },
+          "regional_inventory": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "product_name",
+          "regional_inventory"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Insert regional inventory for a product.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_delete_regional_inventory",
+      "description": "Delete regional inventory.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "inventory_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}/regionalInventories/{region}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "inventory_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Delete regional inventory.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_list_conversion_sources",
+      "description": "List conversion sources.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List conversion sources."
+    },
+    {
+      "name": "merchant_get_conversion_source",
+      "description": "Get one conversion source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversion_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/conversionSources/{sourceId}"
+          }
+        },
+        "required": [
+          "conversion_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "Get one conversion source."
+    },
+    {
+      "name": "merchant_create_conversion_source",
+      "description": "Create a conversion source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "conversion_source": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "account_name",
+          "conversion_source"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Create a conversion source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_update_conversion_source",
+      "description": "Update a conversion source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversion_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/conversionSources/{sourceId}"
+          },
+          "update_mask": {
+            "type": "string"
+          },
+          "conversion_source": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "conversion_source_name",
+          "update_mask",
+          "conversion_source"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Update a conversion source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_archive_conversion_source",
+      "description": "Archive a conversion source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversion_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/conversionSources/{sourceId}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "conversion_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Archive a conversion source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_undelete_conversion_source",
+      "description": "Re-enable an archived conversion source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "conversion_source_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/conversionSources/{sourceId}"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "conversion_source_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "operations",
+      "summary": "Re-enable an archived conversion source.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates."
+      ]
+    },
+    {
+      "name": "merchant_search_report",
+      "description": "Run a Merchant Center Query Language report.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          },
+          "query": {
+            "type": "string",
+            "description": "Merchant Center Query Language query."
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "reporting",
+      "summary": "Run a Merchant Center Query Language report."
+    },
+    {
+      "name": "merchant_list_issues",
+      "description": "List account issues with resolution guidance.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "Legacy shorthand Merchant Center account ID."
+          },
+          "language_code": {
+            "type": "string",
+            "description": "Optional BCP-47 language code."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "Optional IANA time zone."
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": []
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "List account issues with resolution guidance."
+    },
+    {
+      "name": "merchant_render_account_issues",
+      "description": "Render account issues with resolution actions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "request": {
+            "type": "object",
+            "description": "RenderAccountIssues request body.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Render account issues with resolution actions."
+    },
+    {
+      "name": "merchant_render_product_issues",
+      "description": "Render product issues with resolution actions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_name": {
+            "type": "string",
+            "description": "accounts/{accountId}/products/{product}"
+          },
+          "request": {
+            "type": "object",
+            "description": "RenderProductIssues request body.",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "product_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Render product issues with resolution actions."
+    },
+    {
+      "name": "merchant_list_quotas",
+      "description": "List Merchant API quota usage for an account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account_name": {
+            "type": "string",
+            "description": "accounts/{accountId}"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "Page size.",
+            "default": 100
+          },
+          "page_token": {
+            "type": "string",
+            "description": "Optional next-page token."
+          }
+        },
+        "required": [
+          "account_name"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "support",
+      "summary": "List Merchant API quota usage for an account."
+    },
+    {
+      "name": "merchant_api_call",
+      "description": "Call any documented Merchant API endpoint using a fixed Google service allowlist.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "enum": [
+              "accounts",
+              "products",
+              "reports",
+              "data_sources",
+              "inventories",
+              "promotions",
+              "conversions",
+              "quota",
+              "issue_resolution",
+              "notifications",
+              "lfp",
+              "order_tracking",
+              "reviews_v1beta",
+              "reviews_v1alpha",
+              "product_studio_v1alpha",
+              "loyalty_customers_v1alpha",
+              "youtube_shopping_checkout_v1beta",
+              "youtube_shopping_checkout_v1alpha",
+              "youtube_v1alpha"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ],
+            "default": "GET"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative API path only; full URLs are rejected."
+          },
+          "query": {
+            "type": "object",
+            "description": "Optional query parameters.",
+            "additionalProperties": true
+          },
+          "body": {
+            "type": "object",
+            "description": "Official Merchant API request body.",
+            "additionalProperties": true
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Preview the Merchant API request without changing data. Defaults to true.",
+            "default": true
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be true with dry_run=false and MERCHANT_ENABLE_MUTATIONS=true before a write executes.",
+            "default": false
+          }
+        },
+        "required": [
+          "service",
+          "method",
+          "path"
+        ]
+      },
+      "source": "https://github.com/marwa-mrwan/google-clarity-mcp-codex/blob/2a6881b03cc8825ff634f8512100c8b566b6758f/google-mcp/lib/merchant-center.js",
+      "scope": "merchant",
+      "operation": "mixed",
+      "category": "interface",
+      "summary": "Call any documented Merchant API endpoint using a fixed Google service allowlist.",
+      "notes": [
+        "Mutation execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true; otherwise returns a request preview. GET through merchant_api_call executes without mutation gates.",
+        "Generic dispatcher supports GET/POST/PUT/PATCH/DELETE over fixed service allowlist. Non-GET methods are treated as mutations, including arbitrary POST. Optional beta/alpha service entries do not affect core v1 service registration."
+      ]
+    }
+  ],
+  "notes": [
+    "Only the Google MCP server’s Merchant tools are included; the separate Clarity server is outside this catalog.",
+    "Writes default to previews. Execution requires dry_run=false, confirm=true, and MERCHANT_ENABLE_MUTATIONS=true.",
+    "Generic merchant_api_call includes alpha/beta service choices whose endpoint availability was not exercised; named core operations target Merchant API v1."
+  ]
+}

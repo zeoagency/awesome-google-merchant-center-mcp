@@ -7,10 +7,6 @@ __pycache__/
 .pytest_cache/
 CLAUDE.md
 
-# Inner development artifacts, specifications, datasets, and scripts
+# Local research and generated caches
 specs/
-scripts/
 data/
-tests/
-*.json
-*.py

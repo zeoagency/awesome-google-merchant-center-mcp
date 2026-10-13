@@ -1,0 +1,374 @@
+{
+  "id": "scalelean",
+  "upstream": "https://github.com/ScaleLean/google-ads-mcp-starter",
+  "revision": "aa162a6e538b1899973ad20ec59de3246cd29764",
+  "verifiedAt": "2026-10-13T15:29:54.004230+00:00",
+  "title": "ScaleLean/google-ads-mcp-starter",
+  "primaryCategory": "catalog",
+  "summary": "Prepare, validate, approve, apply, and verify controlled feed and product changes; inspect products, issues, and reports.",
+  "examples": [
+    "merchant_prepare_write",
+    "merchant_apply_approved_write"
+  ],
+  "method": "Runtime FastMCP registries inspected with both default and Merchant-enabled configurations; independently re-extracted.",
+  "totalRegisteredTools": 30,
+  "tools": [
+    {
+      "name": "merchant_list_accounts",
+      "description": "List every current Merchant account under the configured manager.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L37",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List every current Merchant account under the configured manager.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_list_products",
+      "description": "List all processed products from the requested page through completion.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "page_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L43",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List all processed products from the requested page through completion.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_get_product",
+      "description": "Get one processed product with destination statuses and item issues.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "product_name"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L51",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Get one processed product with destination statuses and item issues.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_list_product_inputs",
+      "description": "Report the Merchant API v1 raw product-input read limitation.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L57",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Report the Merchant API v1 raw product-input read limitation.",
+      "notes": [
+        "Reports raw product-input read limitation and gateway-managed ledger state; not a Merchant API raw product-input reader."
+      ],
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_get_product_input",
+      "description": "Report the Merchant API v1 raw product-input read limitation.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "product_name"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L66",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Report the Merchant API v1 raw product-input read limitation.",
+      "notes": [
+        "Reports raw product-input read limitation and gateway-managed ledger state; not a Merchant API raw product-input reader."
+      ],
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_list_data_sources",
+      "description": "List primary and supplemental sources with safe fetch status details.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L77",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List primary and supplemental sources with safe fetch status details.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_account_issues",
+      "description": "List all current Merchant account issues and warnings.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L83",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "List all current Merchant account issues and warnings.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_render_product_issues",
+      "description": "Render current product issue actions, including review action context.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "product_name"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L89",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Render current product issue actions, including review action context.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_reports_search",
+      "description": "Run a fully paged read-only MCQL report query on approved views.\n\nPrice competitiveness example (id and report_country_code are required):\nSELECT id, offer_id, report_country_code, price, benchmark_price\nFROM price_competitiveness_product_view\n\nPrice insights example (id is required):\nSELECT id, offer_id, price, suggested_price FROM price_insights_product_view\n\nAlso accepts product_view and product_performance_view. Use explicit\nfield names in SELECT. Price objects contain amountMicros and currencyCode;\ndivide amountMicros by 1,000,000 for the currency amount. A successful empty\nprice report returns availability=no_matching_data with no inferred cause.\nQuery, permission, and service failures remain errors, not missing data.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id",
+          "query"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L95",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "reporting",
+      "summary": "Run a fully paged read-only MCQL report query on approved views.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_prepare_write",
+      "description": "Prepare one exact Merchant write and record its live before state.\n\nData-source reference fields must use the complete Merchant resource name:\naccounts/{account_id}/dataSources/{id}. API supplemental creation accepts\neither an empty configuration or both contentLanguage and feedLabel.\n\nInsert titles with this complete MCP input:\n{\"request\":{\"account_id\":\"1111111111\",\"operation\":\n\"product_inputs_insert_titles\",\"reason\":\"Title test\",\n\"data_source\":\"accounts/1111111111/dataSources/123456789\",\n\"inputs\":[{\"offerId\":\"SKU-EXAMPLE-1\",\"contentLanguage\":\"en\",\n\"feedLabel\":\"-\",\"title\":\"Test title\"}]}}.\n\nInsert attributes with this complete MCP input:\n{\"request\":{\"account_id\":\"1111111111\",\"operation\":\n\"product_inputs_insert_attributes\",\"reason\":\"Label test\",\n\"data_source\":\"accounts/1111111111/dataSources/123456789\",\n\"products\":[{\"offerId\":\"SKU-EXAMPLE-1\",\"contentLanguage\":\"en\",\n\"feedLabel\":\"-\",\"attributes\":{\"customLabel1\":\"hero\",\n\"customLabel2\":\"margin_high\"}}]}}.\n\nAllowed attributes are title and customLabel1 through customLabel4.\ncustomLabel0 is protected. Labels must be non-empty and at most 100\ncharacters. Both insert operations merge with the full gateway-recorded\ninput in this source, preserving existing title and label overrides.\n\nDelete those managed inputs with this complete MCP input:\n{\"request\":{\"account_id\":\"1111111111\",\"operation\":\n\"product_inputs_delete\",\"reason\":\"Undo title test\",\n\"data_source\":\"accounts/1111111111/dataSources/123456789\",\n\"inputs\":[{\"offerId\":\"SKU-EXAMPLE-1\",\"contentLanguage\":\"en\",\n\"feedLabel\":\"-\"}]}}.\n\nDelete removes all overrides for that product in this source. The manifest\nrecords full prior inputs for a separately approved partial restoration.\n\nSupply 1 to 25 inputs. Copy offerId, contentLanguage, and feedLabel exactly\nfrom merchant_get_product. The data source must be a gateway-managed\nHERMES_ API supplemental source. Then call validate, issue approval, apply,\nand verify in that order.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "request": {
+            "additionalProperties": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L115",
+      "scope": "merchant",
+      "operation": "mixed",
+      "category": "catalog",
+      "summary": "Prepare one exact Merchant write and record its live before state.",
+      "notes": [
+        " Preparation or validation may persist private ledger state despite readOnlyHint=True."
+      ],
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_validate_prepared_write",
+      "description": "Recheck hierarchy, source, processed product, and managed input state.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "manifest_hash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "manifest_hash"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L172",
+      "scope": "merchant",
+      "operation": "mixed",
+      "category": "catalog",
+      "summary": "Recheck hierarchy, source, processed product, and managed input state.",
+      "notes": [
+        " Preparation or validation may persist private ledger state despite readOnlyHint=True."
+      ],
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_issue_write_approval",
+      "description": "Issue a signed approval for one validated Merchant write.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "manifest_hash": {
+            "type": "string"
+          },
+          "authorization_reference": {
+            "type": "string"
+          },
+          "expires_in_minutes": {
+            "default": 10,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "manifest_hash",
+          "authorization_reference"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L199",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Issue a signed approval for one validated Merchant write.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_apply_approved_write",
+      "description": "Apply only the exact signed Merchant manifest from the private ledger.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "approval_id": {
+            "type": "string"
+          },
+          "idempotency_key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "approval_id",
+          "idempotency_key"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L229",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Apply only the exact signed Merchant manifest from the private ledger.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    },
+    {
+      "name": "merchant_verify_applied_write",
+      "description": "Read back the processed product and compare the intended fields.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "approval_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "approval_id"
+        ],
+        "type": "object"
+      },
+      "source": "https://github.com/ScaleLean/google-ads-mcp-starter/blob/aa162a6e538b1899973ad20ec59de3246cd29764/ads_mcp/tools/merchant.py#L322",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Read back the processed product and compare the intended fields.",
+      "availability": "Requires the optional Merchant module; absent from the default configuration."
+    }
+  ],
+  "notes": [
+    "The Merchant module is disabled by default. Enable it using the upstream merchant tool configuration and separate Merchant credentials.",
+    "Writes require policy, an approval signer, and a private ledger. Supported changes are limited to the server’s validated Merchant operations."
+  ]
+}

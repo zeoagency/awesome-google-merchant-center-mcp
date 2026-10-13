@@ -1,0 +1,113 @@
+{
+  "id": "mooneyes",
+  "upstream": "https://github.com/MoonEyes/google-ecommerce-mcp",
+  "revision": "55cae2ade8547b92554f4adf90c0d7faaf3cd28b",
+  "verifiedAt": "2026-10-13T15:26:52.168757+00:00",
+  "title": "MoonEyes/google-ecommerce-mcp",
+  "primaryCategory": "diagnostics",
+  "summary": "Inspect product-level issues, view configured data sources, and run Merchant reports.",
+  "examples": [
+    "merchant_product_issues",
+    "merchant_report_query"
+  ],
+  "method": "Runtime FastMCP registry inspection; independently re-extracted, with no handlers called.",
+  "totalRegisteredTools": 13,
+  "tools": [
+    {
+      "name": "server_status",
+      "description": "Which Google services are configured for this server, and whether the stored OAuth token works.\nCall it first when another tool answers not_configured or not_authenticated. Returns one boolean per\nservice, the token storage (os-keyring or file), \"token\": \"ok\" or the error, and the package version.",
+      "inputSchema": {
+        "properties": {},
+        "title": "server_statusArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/MoonEyes/google-ecommerce-mcp/blob/55cae2ade8547b92554f4adf90c0d7faaf3cd28b/src/google_ecommerce_mcp/server.py#L272",
+      "scope": "support",
+      "operation": "read",
+      "category": "support",
+      "summary": "Which Google services are configured for this server, and whether the stored OAuth token works."
+    },
+    {
+      "name": "merchant_data_sources",
+      "description": "Merchant Center data sources (feeds): labels, countries, languages, fetch URLs.",
+      "inputSchema": {
+        "properties": {},
+        "title": "merchant_data_sourcesArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/MoonEyes/google-ecommerce-mcp/blob/55cae2ade8547b92554f4adf90c0d7faaf3cd28b/src/google_ecommerce_mcp/server.py#L462",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Merchant Center data sources (feeds): labels, countries, languages, fetch URLs.",
+      "notes": [
+        "Returns one API page; this tool does not expose a continuation parameter."
+      ]
+    },
+    {
+      "name": "merchant_product_issues",
+      "description": "Merchant Center products with their item-level issues (disapprovals, demotions, warnings) per destination,\nwith the attribute to fix. Scans every page of products up to max_pages. Returns {\"products\": [{offer_id,\nfeed_label, title, link, issues: [{code, severity, description, attribute, destination}]}], \"scanned\": n,\n\"truncated\": bool}.",
+      "inputSchema": {
+        "properties": {
+          "limit": {
+            "default": 50,
+            "description": "Maximum products returned (1 to 1000)",
+            "maximum": 1000,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "only_with_issues": {
+            "default": true,
+            "description": "True: only products with at least one issue; False: every product",
+            "title": "Only With Issues",
+            "type": "boolean"
+          },
+          "max_pages": {
+            "default": 20,
+            "description": "Pages of 250 products to scan at most",
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Max Pages",
+            "type": "integer"
+          }
+        },
+        "title": "merchant_product_issuesArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/MoonEyes/google-ecommerce-mcp/blob/55cae2ade8547b92554f4adf90c0d7faaf3cd28b/src/google_ecommerce_mcp/server.py#L470",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Merchant Center products with their item-level issues (disapprovals, demotions, warnings) per destination,",
+      "notes": [
+        "Scanning stops at max_pages or limit. Check the returned truncated field and any partial-result error before treating the result as complete."
+      ]
+    },
+    {
+      "name": "merchant_report_query",
+      "description": "Run a Merchant Center report (Merchant API reports:search) with an MCQL query, for example product status\nor free-listing performance. Returns Google's raw result rows.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "default": "SELECT id, offer_id, title, aggregated_reporting_context_status FROM product_view LIMIT 50",
+            "description": "Merchant Center Query Language (MCQL) statement. Tables include product_view (must select id) and product_performance_view (clicks, impressions by date or offer)",
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "title": "merchant_report_queryArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/MoonEyes/google-ecommerce-mcp/blob/55cae2ade8547b92554f4adf90c0d7faaf3cd28b/src/google_ecommerce_mcp/server.py#L514",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "reporting",
+      "summary": "Run a Merchant Center report (Merchant API reports:search) with an MCQL query, for example product status",
+      "notes": [
+        "Returns one reports:search response; this tool does not follow continuation tokens."
+      ]
+    }
+  ],
+  "notes": []
+}

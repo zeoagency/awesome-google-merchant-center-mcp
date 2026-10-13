@@ -1,0 +1,120 @@
+{
+  "servers": [
+    "google-data",
+    "yeray",
+    "mooneyes",
+    "adloop",
+    "marketing",
+    "a1",
+    "scalelean",
+    "gmc",
+    "marwa",
+    "google-docs"
+  ],
+  "categories": {
+    "diagnostics": {
+      "label": "Diagnose products and account issues",
+      "anchor": "diagnose-products-and-account-issues",
+      "description": "Find disapprovals, inspect eligibility, and check feed health."
+    },
+    "reporting": {
+      "label": "Analyze performance and market prices",
+      "anchor": "analyze-performance-and-market-prices",
+      "description": "Query product clicks, conversions, price suggestions, and MCQL reports."
+    },
+    "catalog": {
+      "label": "Manage products, feeds, and promotions",
+      "anchor": "manage-products-feeds-and-promotions",
+      "description": "Create or update product inputs, prepare feed changes, and inspect promotions."
+    },
+    "operations": {
+      "label": "Manage accounts, inventory, and conversions",
+      "anchor": "manage-accounts-inventory-and-conversions",
+      "description": "Work with account settings, local and regional inventory, and conversion sources."
+    },
+    "integration": {
+      "label": "Build Merchant API integrations",
+      "anchor": "build-merchant-api-integrations",
+      "description": "Retrieve official guides and task-specific code samples."
+    },
+    "support": {
+      "label": "Check setup and API usage",
+      "anchor": "check-setup-and-api-usage",
+      "description": "Inspect credentials, register projects, and monitor quota."
+    },
+    "interface": {
+      "label": "Call other Merchant API endpoints",
+      "anchor": "call-other-merchant-api-endpoints",
+      "description": "Dispatch explicit requests beyond named operations."
+    }
+  },
+  "companions": {
+    "clis": {
+      "title": "CLIs",
+      "description": "command-line tools for Merchant Center operations or product-feed preparation.",
+      "entries": [
+        {
+          "name": "almoretti/gmc-cli",
+          "url": "https://github.com/almoretti/gmc-cli",
+          "description": "Manages Merchant API v1 accounts, products, data sources, reports, and promotions through a Python CLI with JSON output and dry-run support."
+        },
+        {
+          "name": "yasserstudio/gmc",
+          "url": "https://github.com/yasserstudio/gmc",
+          "description": "Manages Merchant API accounts and products, validates feeds, and runs setup and migration diagnostics through a TypeScript CLI. Includes an [embedded MCP server](docs/mcps/gmc.md) with a complete tool reference."
+        },
+        {
+          "name": "BurhanBeigh/merchant-feed-builder",
+          "url": "https://github.com/BurhanBeigh/merchant-feed-builder",
+          "description": "Generates local Google Merchant Center XML or TSV feeds from Shopify catalog data through a Python CLI with product-field validation. Produces feed files for submission rather than uploading them to Merchant Center."
+        }
+      ]
+    },
+    "sdks": {
+      "title": "SDKs",
+      "description": "official client-library entries: seven language-specific Merchant API library families and the experimental alpha distribution. Each language family contains separate packages for Merchant sub-APIs.",
+      "entries": [
+        {
+          "name": "Google Merchant API — Java",
+          "url": "https://developers.google.com/merchant/api/client-libraries/java",
+          "description": "Provides Java client libraries for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — PHP",
+          "url": "https://developers.google.com/merchant/api/client-libraries/php",
+          "description": "Provides PHP client libraries for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — Python",
+          "url": "https://developers.google.com/merchant/api/client-libraries/python",
+          "description": "Provides Python client libraries for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — Node.js",
+          "url": "https://developers.google.com/merchant/api/client-libraries/nodejs",
+          "description": "Provides Node.js client libraries with TypeScript support for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — .NET/C#",
+          "url": "https://developers.google.com/merchant/api/client-libraries/dotnet",
+          "description": "Provides .NET client libraries for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — Go",
+          "url": "https://developers.google.com/merchant/api/client-libraries/go",
+          "description": "Provides Go client packages for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "Google Merchant API — Ruby",
+          "url": "https://developers.google.com/merchant/api/client-libraries/ruby",
+          "description": "Provides Ruby client libraries for Merchant API accounts, products, inventories, reports, and other sub-APIs."
+        },
+        {
+          "name": "google/merchant-api-alpha-client",
+          "url": "https://github.com/google/merchant-api-alpha-client",
+          "description": "Distributes experimental Merchant API alpha client libraries for testing and demonstration in seven languages. Requires local installation of the supplied library archives."
+        }
+      ]
+    }
+  }
+}

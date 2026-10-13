@@ -1,0 +1,61 @@
+{
+  "id": "adloop",
+  "upstream": "https://github.com/kLOsk/adloop",
+  "revision": "e51d7d6498410755b1e437cc115ef822cbd72e84",
+  "verifiedAt": "2026-10-13",
+  "title": "kLOsk/adloop",
+  "primaryCategory": "diagnostics",
+  "summary": "Discover accounts and inspect aggregate product and account issues; feed health may trigger developer registration.",
+  "examples": [
+    "list_merchant_accounts",
+    "get_merchant_feed_health"
+  ],
+  "method": "Runtime FastMCP provider registry inspection; independently re-extracted, with no handlers called.",
+  "totalRegisteredTools": 122,
+  "tools": [
+    {
+      "name": "list_merchant_accounts",
+      "description": "List Google Merchant Center accounts the connected user can access.\n\nReturns each account's numeric ID, name and whether it is a test\naccount. Provides the account_id used by get_merchant_feed_health;\nnot needed when merchant.account_id is set in the config.\n\nMerchant API: https://developers.google.com/merchant/api/overview",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "source": "https://github.com/kLOsk/adloop/blob/e51d7d6498410755b1e437cc115ef822cbd72e84/src/adloop/server.py",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List Google Merchant Center accounts the connected user can access.",
+      "availability": "Registered by default; ADLOOP_TOOLSETS filters by toolset while core survives. Hosted runtimes can further filter."
+    },
+    {
+      "name": "get_merchant_feed_health",
+      "description": "Merchant Center feed health — disapproved products + account issues.\n\nDisapproved feed items silently starve Shopping and Performance Max\ncampaigns; this reports approved/pending/disapproved counts per\nreporting context (Shopping ads, free listings, ...), the top product\nissues by affected products (with documentation links), and\naccount-level issues — CRITICAL ones stop offers serving entirely.\nProduct-status data lags reality by ~30 minutes.\n\nMerchant API: https://developers.google.com/merchant/api/overview",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "account_id": {
+            "default": "",
+            "type": "string",
+            "description": "Numeric Merchant Center ID from list_merchant_accounts.\nDefaults to merchant.account_id in the config."
+          }
+        },
+        "type": "object"
+      },
+      "source": "https://github.com/kLOsk/adloop/blob/e51d7d6498410755b1e437cc115ef822cbd72e84/src/adloop/server.py",
+      "scope": "merchant",
+      "operation": "mixed",
+      "category": "diagnostics",
+      "summary": "Merchant Center feed health — disapproved products + account issues.",
+      "notes": [
+        "Despite its upstream readOnlyHint, this tool automatically POSTs developer registration when the project is not registered.",
+        "Account issues and aggregate statuses are not paginated. Summed totals cover reporting contexts and countries, so they are not a unique-product count."
+      ],
+      "availability": "Registered by default; ADLOOP_TOOLSETS filters by toolset while core survives. Hosted runtimes can further filter."
+    }
+  ],
+  "notes": [
+    "Only Merchant Center tools are included. The shared health_check probes other services and is omitted.",
+    "ADLOOP_TOOLSETS can filter the advertised tools; these definitions use the full default registry."
+  ]
+}

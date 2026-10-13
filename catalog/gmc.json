@@ -1,0 +1,317 @@
+{
+  "id": "gmc",
+  "upstream": "https://github.com/yasserstudio/gmc",
+  "revision": "1f12b85cc8e2e67ab03589c5bc6bf21aea493df1",
+  "verifiedAt": "2026-10-13T15:30:47.337Z",
+  "title": "yasserstudio/gmc · embedded MCP",
+  "primaryCategory": "catalog",
+  "summary": "Insert or delete product inputs, query reports, inspect issues, and validate local feed files before upload.",
+  "examples": [
+    "products_insert",
+    "preflight"
+  ],
+  "method": "SDK tools/list on in-memory transports, preserving registration code and replacing only application imports/configuration; independently re-extracted.",
+  "totalRegisteredTools": 12,
+  "tools": [
+    {
+      "name": "doctor",
+      "description": "Diagnose auth, GCP-project registration, and Merchant API access. Run this first to verify your setup works.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "support",
+      "operation": "read",
+      "category": "support",
+      "summary": "Diagnose auth, GCP-project registration, and Merchant API access.",
+      "notes": [
+        "Resolves auth, mints token, and probes Merchant API; diagnoses configuration but does not register project or configure account."
+      ]
+    },
+    {
+      "name": "accounts_list",
+      "description": "List Merchant Center accounts accessible by the current credential.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "List Merchant Center accounts accessible by the current credential."
+    },
+    {
+      "name": "accounts_get",
+      "description": "Get details for a specific Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Merchant Center account id"
+          }
+        },
+        "required": [
+          "account"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "Get details for a specific Merchant Center account."
+    },
+    {
+      "name": "products_list",
+      "description": "List products in a Merchant Center account. Returns processed products with status and item-level issues.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Max products per page (default 50, max 250)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 250
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List products in a Merchant Center account.",
+      "notes": [
+        "page_size defaults to 50 in handler (not a JSON Schema default); service follows all pages, so it is not a total result limit."
+      ]
+    },
+    {
+      "name": "products_get",
+      "description": "Get a single product by its product key (e.g. 'en~US~SKU1').",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string",
+            "description": "Product key, e.g. 'en~US~SKU1'"
+          }
+        },
+        "required": [
+          "product_id"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "Get a single product by its product key (e.g."
+    },
+    {
+      "name": "products_insert",
+      "description": "Insert or update a product in a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "Data source id to insert into"
+          },
+          "product": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {},
+            "description": "ProductInput JSON object"
+          }
+        },
+        "required": [
+          "data_source",
+          "product"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Insert or update a product in a Merchant Center account.",
+      "notes": [
+        "Direct POST productInputs:insert creates/replaces a product input; no preview or commit gate. product is an unrestricted JSON object, not a nested ProductInput schema."
+      ]
+    },
+    {
+      "name": "products_delete",
+      "description": "Delete a product from a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string",
+            "description": "Product key, e.g. 'en~US~SKU1'"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "Data source id the product belongs to"
+          }
+        },
+        "required": [
+          "product_id",
+          "data_source"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "write",
+      "category": "catalog",
+      "summary": "Delete a product from a Merchant Center account.",
+      "notes": [
+        "Direct DELETE productInputs; no preview or commit gate."
+      ]
+    },
+    {
+      "name": "datasources_list",
+      "description": "List data sources (feeds) for a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List data sources (feeds) for a Merchant Center account."
+    },
+    {
+      "name": "issues_account",
+      "description": "Get account-level issues (disapprovals, warnings) for a Merchant Center account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Get account-level issues (disapprovals, warnings) for a Merchant Center account."
+    },
+    {
+      "name": "quota_list",
+      "description": "List daily Merchant API call quota and current usage.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "support",
+      "summary": "List daily Merchant API call quota and current usage."
+    },
+    {
+      "name": "reports_query",
+      "description": "Run an MCQL query against the Merchant Center reports API. Use product_performance_view for clicks/impressions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "description": "Merchant Center account id",
+            "type": "string"
+          },
+          "query": {
+            "type": "string",
+            "description": "MCQL query string, e.g. 'SELECT offer_id, clicks FROM product_performance_view WHERE date BETWEEN \"2026-01-01\" AND \"2026-01-31\"'"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "reporting",
+      "summary": "Run an MCQL query against the Merchant Center reports API.",
+      "notes": [
+        "Generic MCQL read query passed to reports:search POST; follows pagination."
+      ]
+    },
+    {
+      "name": "preflight",
+      "description": "Validate product feed files offline against Merchant Center rules — catches disapprovals before upload. No API call, no auth needed.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "dir": {
+            "description": "Directory of product JSON files to scan (default: 'feeds')",
+            "type": "string"
+          },
+          "strict": {
+            "description": "Treat warnings as failures",
+            "type": "boolean"
+          }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "source": "https://github.com/yasserstudio/gmc/blob/1f12b85cc8e2e67ab03589c5bc6bf21aea493df1/packages/mcp/src/server.ts",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Validate product feed files offline against Merchant Center rules — catches disapprovals before upload.",
+      "notes": [
+        "Offline local JSON file read/validation. dir defaults to feeds in handler; strict inherits preflight config unless supplied. No schema defaults."
+      ]
+    }
+  ],
+  "notes": [
+    "Start the embedded server with gmc mcp. Account defaults can come from CLI profiles; explicit account parameters remain available.",
+    "products_insert and products_delete perform immediate mutations; these tools have no preview or confirmation parameter."
+  ]
+}

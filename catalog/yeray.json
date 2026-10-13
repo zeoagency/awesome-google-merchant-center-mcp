@@ -1,0 +1,129 @@
+{
+  "id": "yeray",
+  "upstream": "https://github.com/YerayRodri/merchant-center-mcp",
+  "revision": "0c6685c26d6c732daf6b29fccceb3358140c7f61",
+  "verifiedAt": "2026-10-13T15:24:18.069795+00:00",
+  "title": "YerayRodri/merchant-center-mcp",
+  "primaryCategory": "diagnostics",
+  "summary": "Find product issues and query catalog reports through a small read-only interface.",
+  "examples": [
+    "get_product_issues",
+    "search_report"
+  ],
+  "method": "Runtime FastMCP registry inspection; independently re-extracted, with no handlers called.",
+  "totalRegisteredTools": 4,
+  "tools": [
+    {
+      "name": "get_account",
+      "description": "\nObtiene la información básica de una cuenta de Merchant Center\n(nombre, account_id, idioma, zona horaria, si es cuenta de test).\n\nArgs:\n    account_id: ID numérico de la cuenta de Merchant Center.\n",
+      "inputSchema": {
+        "properties": {
+          "account_id": {
+            "title": "Account Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "title": "get_accountArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/YerayRodri/merchant-center-mcp/blob/0c6685c26d6c732daf6b29fccceb3358140c7f61/server.py",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "operations",
+      "summary": "Retrieve account details such as name, language, and time zone."
+    },
+    {
+      "name": "list_datasources",
+      "description": "\nLista las fuentes de datos (feeds) de una cuenta de Merchant Center\ncon su configuración (primaria, suplementaria, inventario local, etc.).\n\nArgs:\n    account_id: ID numérico de la cuenta de Merchant Center.\n",
+      "inputSchema": {
+        "properties": {
+          "account_id": {
+            "title": "Account Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "title": "list_datasourcesArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/YerayRodri/merchant-center-mcp/blob/0c6685c26d6c732daf6b29fccceb3358140c7f61/server.py",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "catalog",
+      "summary": "List configured primary, supplemental, and local-inventory data sources."
+    },
+    {
+      "name": "search_report",
+      "description": "\nEjecuta una query en Merchant Center Query Language (MCQL) contra la Reports API.\nSolo se puede consultar una vista por request. Vistas más útiles: product_view\n(catálogo procesado + item_issues), product_performance_view (clics/impresiones),\nprice_competitiveness_product_view, price_insights_product_view,\nbest_sellers_brand_view, best_sellers_product_cluster_view.\n\nNota: la Reports API solo funciona en cuentas standalone o sub-cuentas\nindividuales, no en cuentas \"advanced\" (agregadoras).\n\nArgs:\n    account_id: ID numérico de la cuenta de Merchant Center.\n    query: Query MCQL completa, ej.\n        \"SELECT offer_id, title, item_issues, availability FROM product_view\"\n    limit: Máximo de filas a devolver (por defecto 100).\n",
+      "inputSchema": {
+        "properties": {
+          "account_id": {
+            "title": "Account Id",
+            "type": "string"
+          },
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 100,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "account_id",
+          "query"
+        ],
+        "title": "search_reportArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/YerayRodri/merchant-center-mcp/blob/0c6685c26d6c732daf6b29fccceb3358140c7f61/server.py",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "reporting",
+      "summary": "Run an MCQL query and return up to the requested number of report rows.",
+      "notes": [
+        "Reports work on standalone accounts or individual subaccounts, not an advanced aggregator account.",
+        "limit has no schema minimum; supply a positive integer."
+      ]
+    },
+    {
+      "name": "get_product_issues",
+      "description": "\nAuditoría rápida de feed: lista productos con issues activos (rechazados,\ncon warnings, etc.) vía product_view. Atajo sobre search_report para el\ncaso de uso más habitual de QA de catálogo.\n\nNota: MCQL no permite filtrar el campo repetido item_issues en WHERE, así\nque se trae product_view completo y se filtra en Python los productos que\nsí tienen issues.\n\nArgs:\n    account_id: ID numérico de la cuenta de Merchant Center.\n    limit: Máximo de productos con issues a devolver (por defecto 50).\n",
+      "inputSchema": {
+        "properties": {
+          "account_id": {
+            "title": "Account Id",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "account_id"
+        ],
+        "title": "get_product_issuesArguments",
+        "type": "object"
+      },
+      "source": "https://github.com/YerayRodri/merchant-center-mcp/blob/0c6685c26d6c732daf6b29fccceb3358140c7f61/server.py",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "diagnostics",
+      "summary": "Find products with active item issues by filtering catalog report rows locally.",
+      "notes": [
+        "Scans at most 5,000 rows. Products with issues beyond that boundary can be omitted; limit controls matches, not total catalog coverage.",
+        "limit has no schema minimum; supply a positive integer."
+      ]
+    }
+  ],
+  "notes": []
+}

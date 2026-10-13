@@ -1,0 +1,76 @@
+{
+  "id": "google-docs",
+  "upstream": "https://merchantapi.googleapis.com/devdocs/mcp/",
+  "revision": "serverInfo.version: unknown; MCP protocol 2025-03-26",
+  "verifiedAt": "2026-10-13T15:21:25.154699+00:00",
+  "title": "Google Merchant API Developer Documentation MCP",
+  "primaryCategory": "integration",
+  "summary": "Look up official Merchant API guidance and retrieve task-specific code samples.",
+  "examples": [
+    "query_mapi_docs",
+    "find_mapi_code_sample"
+  ],
+  "method": "Live HTTP MCP tools/list; independently rediscovered and compared every description and input schema.",
+  "totalRegisteredTools": 2,
+  "tools": [
+    {
+      "name": "query_mapi_docs",
+      "description": "Queries Merchant API (MAPI) documentation (developer guides and reference) to answer conceptual questions about features, endpoints, and resources. Use this for 'how-to', 'what is', or 'why' questions. IMPORTANT: Do NOT send any code, sensitive authentication information (like API keys or secrets), or personal identifiable information (PII). Examples of PII to avoid include names, contact details, financial information, and government IDs.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "query_mapi_docsArguments",
+        "type": "object"
+      },
+      "source": "https://merchantapi.googleapis.com/devdocs/mcp/",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "integration",
+      "summary": "Retrieve official Merchant API guidance for conceptual and integration questions."
+    },
+    {
+      "name": "find_mapi_code_sample",
+      "description": "Finds specific MAPI code samples to demonstrate how to perform a task. Use this when a user explicitly asks for a code example or snippet. IMPORTANT: Do NOT send any code, sensitive authentication information (like API keys or secrets), or personal identifiable information (PII). Examples of PII to avoid include names, contact details, financial information, and government IDs.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Language"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "find_mapi_code_sampleArguments",
+        "type": "object"
+      },
+      "source": "https://merchantapi.googleapis.com/devdocs/mcp/",
+      "scope": "merchant",
+      "operation": "read",
+      "category": "integration",
+      "summary": "Find a Merchant API code sample for a requested task and optional language."
+    }
+  ],
+  "notes": [
+    "Public documentation retrieval only; these tools do not inspect or change Merchant Center accounts."
+  ]
+}
